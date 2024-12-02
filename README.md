@@ -31,9 +31,9 @@ This repo does not have a licence. This means that by default, it is All Rights 
  - Redistribute the Mod under a different name or Author.
 
 ## Mod Pages
-[Cosmos Portals on CurseForge](https://www.curseforge.com/minecraft/mc-mods/cosmos-portals)
+Cosmos Portals on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cosmos-portals)
 
-[Cosmos Portals on Modrinth](https://modrinth.com/mod/cosmos-portals)
+Cosmos Portals on [Modrinth](https://modrinth.com/mod/cosmos-portals)
 
 ## Development Team:
 - TheCosmicNebula_ (Main Author)
