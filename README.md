@@ -2,13 +2,20 @@
 
 ![cosmos-portals-title-new-green](https://github.com/user-attachments/assets/7b992fef-3abd-48ba-94e6-5f718568420f)
 
-# CosmosPortals
+# **Cosmos Portals**
 Due to having a similiar idea to XCompWiz's Mystcraft Portals, I have created Cosmos Portals, a small mod that adds configurable Portals to Minecraft. Currently using MinecraftForge 1.20.1.
+
+### **Description**
+Cosmos Portals is a simple mod that allows you to create Portals to any Dimension, so long as you can visit that Dimension first. You can even use it to travel between places in the same dimension!
+
+Introducing customizable Portal colours and names, as well as a 4-in-1 Portal Dock to hot-swap multiple locations from a single location. Combine a Portal Dock with a Portal Controller and swap Portals with a simple button click!
+
+You can also filter portals for specific entities, allowing player-only portals, mob-only portals or even item-only portals!
 
 ## Licence
 This repo does not have a licence. This means that by default, it is All Rights Reserved. However, due to having complete control over what rights that includes, here is a list of what you can and cannot do:
 
-## You can:
+### You can:
  - Modify the code for your own personal private use, so long as the modified code is significantly dissimilar from the original code.
  - Use the pull request feature.
  - Create a Fork of this repository if you satisfy the following conditions:
@@ -25,7 +32,7 @@ This repo does not have a licence. This means that by default, it is All Rights 
    - Include the author name (TheCosmicNebula) above the link.
    - You do not re-route the link through comission sites such as Ad.Fly.
 
-## You Cannot:
+### You Cannot:
  - Copy large chunks of code, entire Class files or any assets contained within the Mod.
  - Redistribute the Mod, unless the link you provide is the original. (CurseForge or GitHub)
  - Redistribute the Mod under a different name or Author.
@@ -34,11 +41,5 @@ This repo does not have a licence. This means that by default, it is All Rights 
 Cosmos Portals on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cosmos-portals)
 
 Cosmos Portals on [Modrinth](https://modrinth.com/mod/cosmos-portals)
-
-## Development Team:
-- TheCosmicNebula_ (Main Author)
-
-### Development Team Applications:
- - Please feel free to email: thecosmicnebula_@outlook.com
 
 | 2021 @ TheCosmicNebula | TCN | All Rights Reserved (Except Where Specified) |
