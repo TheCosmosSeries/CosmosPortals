@@ -2,10 +2,10 @@
 
 ![cosmos-portals-title-new-green](https://github.com/user-attachments/assets/7b992fef-3abd-48ba-94e6-5f718568420f)
 
-# **Cosmos Portals**
+# Cosmos Portals
 Due to having a similiar idea to XCompWiz's Mystcraft Portals, I have created Cosmos Portals, a small mod that adds configurable Portals to Minecraft. Currently using MinecraftForge 1.20.1.
 
-### **Description**
+### Description
 Cosmos Portals is a simple mod that allows you to create Portals to any Dimension, so long as you can visit that Dimension first. You can even use it to travel between places in the same dimension!
 
 Introducing customizable Portal colours and names, as well as a 4-in-1 Portal Dock to hot-swap multiple locations from a single location. Combine a Portal Dock with a Portal Controller and swap Portals with a simple button click!
@@ -38,8 +38,10 @@ This repo does not have a licence. This means that by default, it is All Rights 
  - Redistribute the Mod under a different name or Author.
 
 ## Mod Pages
-Cosmos Portals on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cosmos-portals)
+- Cosmos Portals on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cosmos-portals)
+- Cosmos Portals on [Modrinth](https://modrinth.com/mod/cosmos-portals)
 
-Cosmos Portals on [Modrinth](https://modrinth.com/mod/cosmos-portals)
+## The Cosmos Series
+This mod is part of [The Cosmos Series](https://www.github.com/TheCosmosSeries).
 
-| 2021 @ TheCosmicNebula | TCN | All Rights Reserved (Except Where Specified) |
+| 2021 @ TheCosmicNebula | The Cosmos Series | All Rights Reserved (Except Where Specified) |
