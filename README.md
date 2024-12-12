@@ -1,9 +1,11 @@
-![Version](https://img.shields.io/badge/VERSION-1.20.1-success?style=for-the-badge) ![Repo Size](https://img.shields.io/github/repo-size/TheCosmicNebula/CosmosPortals?label=REPO%20SIZE&style=for-the-badge) ![Open Issues](https://img.shields.io/github/issues/TheCosmicNebula/CosmosPortals?style=for-the-badge) ![Closed Issues](https://img.shields.io/github/issues-closed/TheCosmicNebula/CosmosPortals?color=green&style=for-the-badge) 
+![Version](https://img.shields.io/badge/VERSION-1.21.1-3eff8e?style=for-the-badge) ![Version](https://img.shields.io/badge/Loader-NeoForge-ffa835?style=for-the-badge) ![Repo Size](https://img.shields.io/github/repo-size/TheCosmicNebula/CosmosPortals?label=REPO%20SIZE&style=for-the-badge) ![Open Issues](https://img.shields.io/github/issues/TheCosmicNebula/CosmosPortals?style=for-the-badge) ![Closed Issues](https://img.shields.io/github/issues-closed/TheCosmicNebula/CosmosPortals?color=green&style=for-the-badge) 
 
 ![cosmos-portals-title-new-green](https://github.com/user-attachments/assets/7b992fef-3abd-48ba-94e6-5f718568420f)
 
 # Cosmos Portals
-Due to having a similiar idea to XCompWiz's Mystcraft Portals, I have created Cosmos Portals, a small mod that adds configurable Portals to Minecraft. Currently using MinecraftForge 1.20.1.
+Due to having a similiar idea to XCompWiz's Mystcraft Portals, I have created Cosmos Portals, a small mod that adds configurable Portals to Minecraft. 
+
+Currently supporting **1.21.1** and **NeoForge**.
 
 ### Description
 Cosmos Portals is a simple mod that allows you to create Portals to any Dimension, so long as you can visit that Dimension first. You can even use it to travel between places in the same dimension!
@@ -44,4 +46,4 @@ This repo does not have a licence. This means that by default, it is All Rights 
 ## The Cosmos Series
 This mod is part of [The Cosmos Series](https://www.github.com/TheCosmosSeries).
 
-| 2021 @ TheCosmicNebula | The Cosmos Series | All Rights Reserved (Except Where Specified) |
+| 2024 @ TheCosmicNebula | The Cosmos Series | All Rights Reserved (Except Where Specified) |
