@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+	"category": "misc",
+    "pattern": [
+        "I I",
+        "III",
+        " I "
+    ],
+    "key": {
+        "I": {
+            "item": "cosmosportals:item_cosmic_ingot"
+        }
+    },
+    "result": {
+		"count": 1,
+		"id": "cosmosportals:item_cosmic_wrench"
+    }
+}

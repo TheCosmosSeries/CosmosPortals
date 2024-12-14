@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",	
+	"pattern": [
+		"III",
+		"III",
+		"III"
+	],
+	"key": {
+		"I": {
+			"item": "cosmosportals:item_cosmic_ingot"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:block_cosmic"
+	}
+}

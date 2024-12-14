@@ -1,0 +1,6 @@
+{
+    "type": "neoforge:add_features",
+    "biomes": "#c:is_overworld",
+    "features": "cosmosportals:ore_cosmic",
+    "step": "underground_ores"
+}

@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"IGI",
+		"GPG",
+		"IGI"
+	],
+	"key": {
+		"I": {
+			"item": "cosmosportals:item_cosmic_ingot"
+		},
+		"P": {
+			"item": "cosmosportals:item_cosmic_pearl"
+		},
+		"G": {
+			"item": "cosmosportals:item_cosmic_gem"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:item_dimension_container_unlinked"
+	}
+}

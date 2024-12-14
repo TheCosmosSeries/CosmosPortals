@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"CGC",
+		"GPG",
+		"CGC"
+	],
+	"key": {
+		"C": {
+			"item": "cosmosportals:block_portal_frame"
+		},
+		"P": {
+			"item": "cosmosportals:item_cosmic_pearl"
+		},
+		"G": {
+			"item": "cosmosportals:item_cosmic_gem"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:block_portal_dock"
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"B ",
+		"S "
+	],
+	"key": {
+		"S": {
+			"item": "cosmosportals:item_cosmic_material"
+		},
+		"B": {
+			"item": "minecraft:book"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:item_cosmic_guide"
+	}
+}

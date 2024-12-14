@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",	
+	"ingredients": [
+        {
+            "item": "cosmosportals:block_cosmic"
+        }
+	],
+	
+	"result": {
+		"count": 9,
+		"id": "cosmosportals:item_cosmic_ingot"
+	}
+}

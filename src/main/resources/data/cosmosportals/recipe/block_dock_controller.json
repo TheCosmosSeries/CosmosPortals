@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"FCF",
+		"BRB",
+		"FCF"
+	],
+	"key": {
+		"F": {
+			"item": "cosmosportals:block_portal_frame"
+		},
+		"C": {
+			"item": "minecraft:comparator"
+		},
+		"B": {
+			"item": "minecraft:stone_button"
+		},
+		"R": {
+			"item": "minecraft:redstone_block"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:block_dock_controller"
+	}
+}

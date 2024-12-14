@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"BEB",
+		"EDE",
+		"BEB"
+	],
+	"key": {
+		"B": {
+			"item": "cosmosportals:block_cosmic"
+		},
+		"D": {
+			"item": "cosmosportals:block_portal_dock"
+		},
+		"E": {
+			"item": "minecraft:emerald"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:block_portal_dock_upgraded4"
+	}
+}

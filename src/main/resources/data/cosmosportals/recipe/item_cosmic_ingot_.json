@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+	"category": "misc",
+    "pattern": [
+        "ICI",
+        "CSC",
+        "ICI"
+    ],
+    "key": {
+        "S": {
+            "item": "cosmosportals:item_cosmic_material"
+        },
+        "I" : {
+            "item": "minecraft:iron_ingot"
+        },
+        "C" : {
+            "item": "minecraft:copper_ingot"
+        }
+    },
+    "result": {
+		"count": 8,
+		"id": "cosmosportals:item_cosmic_ingot"
+    }
+}
