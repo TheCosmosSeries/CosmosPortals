@@ -1,7 +1,7 @@
 package com.tcn.cosmosportals.client.colour;
 
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
-import com.tcn.cosmosportals.core.block.BlockDockController;
+import com.tcn.cosmosportals.core.block.BlockPortalDockController4;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortal;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDock;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockUpgraded4;
@@ -22,7 +22,7 @@ public class BlockColour implements BlockColor {
 	public int getColor(BlockState stateIn, BlockAndTintGetter displayReaderIn, BlockPos posIn, int tintIndexIn) {
 		BlockEntity tile = displayReaderIn.getBlockEntity(posIn);
 		
-		if (stateIn.getBlock() instanceof BlockDockController) {
+		if (stateIn.getBlock() instanceof BlockPortalDockController4) {
 			if (tintIndexIn == 0) {
 				return ComponentColour.GRAY.dec();
 			} else if (tintIndexIn == 1) {

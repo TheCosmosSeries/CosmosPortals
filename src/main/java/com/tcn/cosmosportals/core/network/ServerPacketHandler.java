@@ -61,12 +61,12 @@ public class ServerPacketHandler {
 		if (data instanceof PacketNextSlot packet) {
 			context.enqueueWork(() -> {
 				ServerLevel world = (ServerLevel) context.player().level();
-				BlockEntity tile = world.getBlockEntity(packet.pos());
+				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (tile instanceof BlockEntityPortalDockUpgraded4 tileDock) {
-					tileDock.selectNextSlot(packet.forward());
-				} else if (tile instanceof BlockEntityPortalDockUpgraded8 tileDock) {
-					tileDock.selectNextSlot(packet.forward());
+				if (entity instanceof BlockEntityPortalDockUpgraded4 tileEntity) {
+					tileEntity.selectNextSlot(packet.forward());
+				} else if (entity instanceof BlockEntityPortalDockUpgraded8 tileEntity) {
+					tileEntity.selectNextSlot(packet.forward());
 				} else {
 					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <portaldockupgraded> Block Entity not equal to expected.");
 				}		
@@ -76,19 +76,19 @@ public class ServerPacketHandler {
 		if (data instanceof PacketPortalDock packet) {
 			context.enqueueWork(() -> {
 				ServerLevel world = (ServerLevel) context.player().level();
-				BlockEntity tile = world.getBlockEntity(packet.pos());
+				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (tile instanceof AbstractBlockEntityPortalDock tileDock) {
+				if (entity instanceof AbstractBlockEntityPortalDock tileEntity) {
 					if (packet.id() == 0) {
-						tileDock.toggleRenderLabel();
+						tileEntity.toggleRenderLabel();
 					} else if (packet.id() == 1) {
-						tileDock.togglePlaySound();
+						tileEntity.togglePlaySound();
 					} else if (packet.id() == 2) {
-						tileDock.toggleEntities(false);
+						tileEntity.toggleEntities(false);
 					} else if (packet.id() == 3) {
-						tileDock.toggleParticles();
+						tileEntity.toggleParticles();
 					} else if (packet.id() == 4) {
-						tileDock.toggleEntities(true);
+						tileEntity.toggleEntities(true);
 					} else {
 						CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <portaldock> Setting Id: { " + packet.id() + " } not recognised.");
 					}
@@ -101,10 +101,10 @@ public class ServerPacketHandler {
 		if (data instanceof PacketWorkbenchName packet) {
 			context.enqueueWork(() -> {
 				ServerLevel world = (ServerLevel) context.player().level();
-				BlockEntity tile = world.getBlockEntity(packet.pos());
+				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (tile instanceof BlockEntityContainerWorkbench tileDock) {
-					tileDock.setContainerDisplayName(packet.displayName());
+				if (entity instanceof BlockEntityContainerWorkbench tileEntity) {
+					tileEntity.setContainerDisplayName(packet.displayName());
 				} else {
 					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <container_workbench> Block Entity not equal to expected.");
 				}

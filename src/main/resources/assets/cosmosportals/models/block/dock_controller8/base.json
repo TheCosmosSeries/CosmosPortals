@@ -13,8 +13,8 @@
         }
     },
     "textures": {
-        "particle": "cosmosportals:block/dock/controller/base",
-        "base": "cosmosportals:block/dock/controller/base",
+        "particle": "cosmosportals:block/dock/controller8/base",
+        "base": "cosmosportals:block/dock/controller8/base",
         "ends": "cosmosportals:block/frame/normal"
     },
     "elements": [

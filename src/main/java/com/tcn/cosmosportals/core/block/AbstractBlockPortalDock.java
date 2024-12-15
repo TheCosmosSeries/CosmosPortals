@@ -48,19 +48,19 @@ public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implemen
 
 	@Override
 	public void attack(BlockState state, Level world, BlockPos pos, Player player) {
-		BlockEntity tileEntity = world.getBlockEntity(pos);
+		BlockEntity entity = world.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			((AbstractBlockEntityPortalDock) tileEntity).attack(state, world, pos, player);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			blockEntity.attack(state, world, pos, player);
 		}
 	}
 
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack stackIn, BlockState state, Level levelIn, BlockPos pos, Player playerIn, InteractionHand handIn, BlockHitResult hit) {
-		BlockEntity tileEntity = levelIn.getBlockEntity(pos);
+		BlockEntity entity = levelIn.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			return ((AbstractBlockEntityPortalDock) tileEntity).useItemOn(stackIn, state, levelIn, pos, playerIn, handIn, hit);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			return blockEntity.useItemOn(stackIn, state, levelIn, pos, playerIn, handIn, hit);
 		}
 		
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -68,10 +68,10 @@ public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implemen
 
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level levelIn, BlockPos pos, Player playerIn, BlockHitResult hit) {
-		BlockEntity tileEntity = levelIn.getBlockEntity(pos);
+		BlockEntity entity = levelIn.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			return ((AbstractBlockEntityPortalDock) tileEntity).useWithoutItem(state, levelIn, pos, playerIn, hit);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			return blockEntity.useWithoutItem(state, levelIn, pos, playerIn, hit);
 		}
 		
 		return InteractionResult.PASS;
@@ -79,28 +79,28 @@ public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implemen
 
 	@Override
 	public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+		BlockEntity entity = worldIn.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			((AbstractBlockEntityPortalDock) tileEntity).onPlace(state, worldIn, pos, oldState, isMoving);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			blockEntity.onPlace(state, worldIn, pos, oldState, isMoving);
 		}
 	}
 
 	@Override
 	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+		BlockEntity entity = worldIn.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			((AbstractBlockEntityPortalDock) tileEntity).setPlacedBy(worldIn, pos, state, placer, stack);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			blockEntity.setPlacedBy(worldIn, pos, state, placer, stack);
 		}
 	}
 
 	@Override
 	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+		BlockEntity entity = worldIn.getBlockEntity(pos);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			return ((AbstractBlockEntityPortalDock) tileEntity).playerWillDestroy(worldIn, pos, state, player);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			return blockEntity.playerWillDestroy(worldIn, pos, state, player);
 		}
 		
 		return this.defaultBlockState();
@@ -109,19 +109,19 @@ public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implemen
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void animateTick(BlockState stateIn, Level levelIn, BlockPos posIn, RandomSource randIn) {
-		BlockEntity tileEntity = levelIn.getBlockEntity(posIn);
+		BlockEntity entity = levelIn.getBlockEntity(posIn);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			((AbstractBlockEntityPortalDock) tileEntity).animateTick(stateIn, levelIn, posIn, randIn);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			blockEntity.animateTick(stateIn, levelIn, posIn, randIn);
 		}
 	}
 	
 	@Override
 	public void neighborChanged(BlockState state, Level levelIn, BlockPos posIn, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		BlockEntity tileEntity = levelIn.getBlockEntity(posIn);
+		BlockEntity entity = levelIn.getBlockEntity(posIn);
 		
-		if (tileEntity instanceof AbstractBlockEntityPortalDock) {
-			((AbstractBlockEntityPortalDock) tileEntity).neighborChanged(state, levelIn, posIn, blockIn, fromPos, isMoving);
+		if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
+			blockEntity.neighborChanged(state, levelIn, posIn, blockIn, fromPos, isMoving);
 		}
 	}
 

@@ -135,7 +135,7 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		if (this.customColours[this.currentSlotIndex].isEmpty()) {
 			return this.getContainerDisplayColour();
 		} else {
-			return this.customColours[this.currentSlotIndex].dec();
+			return this.customColours[this.currentSlotIndex].decOpaque();
 		}
 	}
 	
@@ -400,11 +400,9 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		for (Direction c : Direction.values()) {
 			BlockEntity tile = levelIn.getBlockEntity(posIn.offset(c.getNormal()));
 			
-			if (tile instanceof BlockEntityPortal) {
-				BlockEntityPortal portalTile = (BlockEntityPortal) tile;
-
-				if (portalTile.getDestDimension().location() == this.getDestDimension().location()) {
-					if (portalTile.getDestPos().equals(this.destInfo.getPos())) {
+			if (tile instanceof BlockEntityPortal blockEntity) {
+				if (blockEntity.getDestDimension().location() == this.getDestDimension().location()) {
+					if (blockEntity.getDestPos().equals(this.destInfo.getPos())) {
 						levelIn.setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
 						
 						this.isPortalFormed = false;
@@ -431,25 +429,23 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 				for (int i = 0; i < blockMap.size(); i++) {
 					BlockPos testPos = blockMap.get(i);
 					
-					BlockEntity testTile = this.getLevel().getBlockEntity(testPos);
+					BlockEntity entity = this.getLevel().getBlockEntity(testPos);
 
-					if (testTile instanceof BlockEntityPortal) {
-						BlockEntityPortal tileEntity = (BlockEntityPortal) testTile;
-						
-						if (tileEntity.destDimension.equals(this.destDimension) && tileEntity.getDestPos().equals(this.getDestPos())) {
+					if (entity instanceof BlockEntityPortal blockEntity) {
+						if (blockEntity.destDimension.equals(this.destDimension) && blockEntity.getDestPos().equals(this.getDestPos())) {
 							switch (settingsIn) {
 								case PLAY_SOUNDS:
-									tileEntity.setPlaySound(value);
+									blockEntity.setPlaySound(value);
 									break;
 								case ALLOWED_ENTITIES:
-									tileEntity.setAllowedEntities(entities);
+									blockEntity.setAllowedEntities(entities);
 									break;
 								case SHOW_PARTICLES:
-									tileEntity.setShowParticles(value);
+									blockEntity.setShowParticles(value);
 									break;
 								case DISPLAY_COLOUR:
 									if (colourIn > -1) {
-										tileEntity.setDisplayColour(colourIn);
+										blockEntity.setDisplayColour(colourIn);
 									}
 									break;
 								case NONE:
@@ -459,7 +455,7 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 							}
 						}
 						
-						tileEntity.sendUpdates(true);
+						blockEntity.sendUpdates(true);
 					}
 				}
 				return true;
@@ -638,9 +634,28 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		return this.checkIfOwner(playerIn);
 	}
 	
-	public ComponentColour[] getCustomColours(boolean checkSlots) {
+	public int[] getCustomColours(boolean checkSlots) {
+		int[] newColours = new int[] { customColours[0].dec(), customColours[1].dec(), customColours[2].dec(), customColours[3].dec(), customColours[4].dec(), customColours[5].dec(), customColours[6].dec(), customColours[7].dec() };
+				
+		if (checkSlots) {
+			for (int i = 0; i <= this.getMaxSlotIndex(); i++) {
+				ItemStack stack = this.getItem(i);
+				
+				if (stack.getItem() instanceof ItemPortalContainer item) {
+					if (customColours[i].isEmpty()) {
+						newColours[i] = item.getContainerDisplayColour(stack);
+					}
+				} else {
+					newColours[i] =  ComponentColour.EMPTY.dec();
+				}
+			}
+		}
+		return newColours;
+	}
+
+	public ComponentColour[] getCustomColoursComp(boolean checkSlots) {
 		ComponentColour[] newColours = new ComponentColour[] { customColours[0], customColours[1], customColours[2], customColours[3], customColours[4], customColours[5], customColours[6], customColours[7] };
-		
+				
 		if (checkSlots) {
 			for (int i = 0; i <= this.getMaxSlotIndex(); i++) {
 				ItemStack stack = this.getItem(i);
@@ -667,8 +682,7 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		if (!this.getItem(this.getCurrentSlotIndex()).isEmpty()) {
 			ItemStack stack = this.getItem(this.getCurrentSlotIndex());
 			
-			if (stack.getItem() instanceof ItemPortalContainer) {
-				ItemPortalContainer item = (ItemPortalContainer) stack.getItem();
+			if (stack.getItem() instanceof ItemPortalContainer item) {
 				String displayName = item.getContainerDisplayName(stack);
 				
 				if (displayName.length() > 12) {
@@ -686,9 +700,8 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		if (!this.getItem(this.getCurrentSlotIndex()).isEmpty()) {
 			ItemStack stack = this.getItem(this.getCurrentSlotIndex());
 			
-			if (stack.getItem() instanceof ItemPortalContainer) {
-				ItemPortalContainer item = (ItemPortalContainer) stack.getItem();
-				
+			
+			if (stack.getItem() instanceof ItemPortalContainer item) {
 				return item.getContainerDisplayColour(stack);
 			}
 		}
@@ -761,13 +774,15 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		return this.maxSlotIndex;
 	}
 	
-	public void setCurrentSlot(int newSlot) {
+	public boolean setCurrentSlot(int newSlot) {
 		if (newSlot >= 0 && newSlot <= this.maxSlotIndex) {
 			if (newSlot != this.currentSlotIndex || !this.isPortalFormed) {
 				this.currentSlotIndex = newSlot;
 				this.updatePortalBasedOnSlot();
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public void selectNextSlot(boolean forward) {

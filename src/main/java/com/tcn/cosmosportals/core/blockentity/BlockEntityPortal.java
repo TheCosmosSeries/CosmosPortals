@@ -190,21 +190,19 @@ public class BlockEntityPortal extends BlockEntity {
 						float pitch = entityIn.destInfo.getPitch();
 
 						if (entityToTeleport.level().dimension().equals(entityIn.getDestDimension())) {
-							if (entityToTeleport instanceof ServerPlayer) {
-								ServerPlayer playerIn = (ServerPlayer) entityToTeleport;
-								
-								if (!playerIn.isShiftKeyDown()) {
+							if (entityToTeleport instanceof ServerPlayer serverPlayer) {
+								if (!serverPlayer.isShiftKeyDown()) {
 									if (entityIn.allowedEntities.equals(EnumAllowedEntities.ALL) || entityIn.allowedEntities.equals(EnumAllowedEntities.PLAYERS_ONLY)) {
 										if (ModConfigManager.getInstance().getPlayPortalTravelSounds() && entityIn.playSound) {
-											playerIn.connection.send(new ClientboundSoundPacket(ModSoundManager.PORTAL_TRAVEL, SoundSource.AMBIENT, targetPos.getX(), targetPos.getY(), targetPos.getZ(), 0.1F, 1, 1));
+											serverPlayer.connection.send(new ClientboundSoundPacket(ModSoundManager.PORTAL_TRAVEL, SoundSource.AMBIENT, targetPos.getX(), targetPos.getY(), targetPos.getZ(), 0.1F, 1, 1));
 										}
 										
-										if (ModEventFactory.onPortalTravel(playerIn, playerIn.blockPosition(), targetPos, entityIn.destDimension)) {
-											playerIn.connection.teleport(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5, yaw, pitch);
+										if (ModEventFactory.onPortalTravel(serverPlayer, serverPlayer.blockPosition(), targetPos, entityIn.destDimension)) {
+											serverPlayer.connection.teleport(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5, yaw, pitch);
 										}
 										
-										playerIn.setYHeadRot(yaw);
-										playerIn.setYBodyRot(pitch);
+										serverPlayer.setYHeadRot(yaw);
+										serverPlayer.setYBodyRot(pitch);
 									}
 								}
 							} else {
@@ -226,15 +224,13 @@ public class BlockEntityPortal extends BlockEntity {
 								}
 							}
 						} else {
-							if (entityToTeleport instanceof ServerPlayer) {
-								ServerPlayer playerIn = (ServerPlayer) entityToTeleport;
-								
-								if (!playerIn.isShiftKeyDown()) {
+							if (entityToTeleport instanceof ServerPlayer serverPlayer) {
+								if (!serverPlayer.isShiftKeyDown()) {
 									if (entityIn.allowedEntities.equals(EnumAllowedEntities.ALL) || entityIn.allowedEntities.equals(EnumAllowedEntities.PLAYERS_ONLY)) {
 										CosmosTeleporter teleporter = CosmosTeleporter.createTeleporter(entityIn.getDestDimension(), targetPos, yaw, pitch, false, false, true);
 										
-										if (ModEventFactory.onPortalTravel(playerIn, playerIn.blockPosition(), targetPos, entityIn.destDimension)) {
-											CosmosTeleportCore.shiftPlayerToDimension(playerIn, teleporter, ModConfigManager.getInstance().getPlayPortalTravelSounds() && entityIn.playSound ? ModSoundManager.PORTAL_TRAVEL : null, 0.1F);
+										if (ModEventFactory.onPortalTravel(serverPlayer, serverPlayer.blockPosition(), targetPos, entityIn.destDimension)) {
+											CosmosTeleportCore.shiftPlayerToDimension(serverPlayer, teleporter, ModConfigManager.getInstance().getPlayPortalTravelSounds() && entityIn.playSound ? ModSoundManager.PORTAL_TRAVEL : null, 0.1F);
 										}
 									}
 								}

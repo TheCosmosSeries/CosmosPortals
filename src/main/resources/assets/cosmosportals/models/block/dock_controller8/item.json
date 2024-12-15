@@ -13,11 +13,11 @@
         }
     },
     "textures": {
-        "particle": "cosmosportals:block/dock/controller/base",
-        "base": "cosmosportals:block/dock/controller/base",
+        "particle": "cosmosportals:block/dock/controller8/base",
+        "base": "cosmosportals:block/dock/controller8/base",
         "ends": "cosmosportals:block/frame/normal",
-        "buttons": "cosmosportals:block/dock/controller/buttons",
-        "text": "cosmosportals:block/dock/controller/text"
+        "buttons": "cosmosportals:block/dock/controller8/buttons",
+        "text": "cosmosportals:block/dock/controller8/text"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

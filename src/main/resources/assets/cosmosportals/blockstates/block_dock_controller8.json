@@ -1,0 +1,25 @@
+{
+	"multipart": [ 
+		{	"when": { "AND": [ { "east": "false", "north": "false", "south": "false", "west": "false"} ]}, "apply": { "model": "cosmosportals:block/dock_controller8/base" } },
+		
+		{	"when": { "AND": [ { "east": "false", "north": "true",  "south": "false", "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/single" } },
+		{	"when": { "AND": [ { "east": "false", "north": "false", "south": "true",  "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/single", "y": 180 } },
+		{	"when": { "AND": [ { "east": "true",  "north": "false", "south": "false", "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/single", "y":  90 } },
+		{	"when": { "AND": [ { "east": "false", "north": "false", "south": "false", "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/single", "y": -90 } },
+		
+        {   "when": { "AND": [ { "east": "true",  "north": "false", "south": "false", "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double", "y": 90 } },
+        {   "when": { "AND": [ { "east": "false", "north": "true",  "south": "true",  "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double" } },
+        
+        {   "when": { "AND": [ { "east": "true",  "north": "true",  "south": "false", "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double_angle" } },
+        {   "when": { "AND": [ { "east": "true",  "north": "false", "south": "true",  "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double_angle", "y": 90 } },
+        {   "when": { "AND": [ { "east": "false", "north": "true",  "south": "false", "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double_angle", "y": -90 } },
+        {   "when": { "AND": [ { "east": "false", "north": "false", "south": "true",  "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/double_angle", "y": 180 } },
+        
+        {   "when": { "AND": [ { "east": "true",  "north": "true",  "south": "true",  "west": "false" } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/triple", "y": 90 } },
+        {   "when": { "AND": [ { "east": "true",  "north": "false", "south": "true",  "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/triple", "y": 180 } },
+        {   "when": { "AND": [ { "east": "true",  "north": "true",  "south": "false", "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller/8triple" } },
+        {   "when": { "AND": [ { "east": "false", "north": "true",  "south": "true",  "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/triple", "y": -90 } },
+
+		{	"when": { "AND": [ { "east": "true",  "north": "true",  "south": "true",  "west": "true"  } ]}, "apply": { "model": "cosmosportals:block/dock_controller8/quad" } }
+	]
+}

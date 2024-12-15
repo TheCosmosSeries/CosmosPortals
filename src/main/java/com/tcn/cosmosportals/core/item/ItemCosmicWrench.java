@@ -6,7 +6,8 @@ import com.tcn.cosmoslibrary.common.chat.CosmosChatUtil;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDock;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityDockController;
+import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController4;
+import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController8;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -95,15 +96,13 @@ public class ItemCosmicWrench extends Item {
 
 		if (playerIn.isShiftKeyDown()) {
 			if (entity != null) {
-				if (entity instanceof AbstractBlockEntityPortalDock) {
-					AbstractBlockEntityPortalDock dockEntity = (AbstractBlockEntityPortalDock) entity;
-					
+				if (entity instanceof AbstractBlockEntityPortalDock blockEntity) {
 					CompoundTag tag = new CompoundTag();
 					CompoundTag dockInfo = new CompoundTag();
 					
-					dockInfo.putInt("dockX", dockEntity.getBlockPos().getX());
-					dockInfo.putInt("dockY", dockEntity.getBlockPos().getY());
-					dockInfo.putInt("dockZ", dockEntity.getBlockPos().getZ());
+					dockInfo.putInt("dockX", blockEntity.getBlockPos().getX());
+					dockInfo.putInt("dockY", blockEntity.getBlockPos().getY());
+					dockInfo.putInt("dockZ", blockEntity.getBlockPos().getZ());
 					
 					tag.put("dockInfo", dockInfo);
 					stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
@@ -111,10 +110,8 @@ public class ItemCosmicWrench extends Item {
 					CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.item.use.wrench_one"));
 					return InteractionResult.SUCCESS;
 				}
-
-				if (entity instanceof BlockEntityDockController) {
-					BlockEntityDockController controllerEntity = (BlockEntityDockController) entity;
-					
+				
+				if (entity instanceof BlockEntityPortalDockController4 blockEntity) {
 					if (stack.has(DataComponents.CUSTOM_DATA)) {
 						CompoundTag stackTag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
 						CompoundTag dockInfo = stackTag.getCompound("dockInfo");
@@ -125,7 +122,31 @@ public class ItemCosmicWrench extends Item {
 						
 						BlockPos setPos = new BlockPos(X, Y, Z);
 						
-						if (!controllerEntity.setDockPos(setPos)) {
+						if (!blockEntity.setDockPos(setPos)) {
+							CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.RED, "boldunderline", "cosmosportals.item.use.wrench_two"));
+							return InteractionResult.FAIL;
+						}
+
+						CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.item.use.wrench_three"));
+						return InteractionResult.SUCCESS;
+					} else {
+						CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.item.use.wrench_four"));
+						return InteractionResult.FAIL;
+					}
+				}
+
+				if (entity instanceof BlockEntityPortalDockController8 blockEntity) {
+					if (stack.has(DataComponents.CUSTOM_DATA)) {
+						CompoundTag stackTag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
+						CompoundTag dockInfo = stackTag.getCompound("dockInfo");
+						
+						int X = dockInfo.getInt("dockX");
+						int Y = dockInfo.getInt("dockY");
+						int Z = dockInfo.getInt("dockZ");
+						
+						BlockPos setPos = new BlockPos(X, Y, Z);
+						
+						if (!blockEntity.setDockPos(setPos)) {
 							CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.RED, "boldunderline", "cosmosportals.item.use.wrench_two"));
 							return InteractionResult.FAIL;
 						}

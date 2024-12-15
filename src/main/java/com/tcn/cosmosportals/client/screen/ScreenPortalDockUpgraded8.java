@@ -208,7 +208,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			
 			if (this.colourButton0.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[0].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[0].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -216,7 +216,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton1.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[1].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[1].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -224,7 +224,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton2.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[2].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[2].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -232,7 +232,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton3.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[3].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[3].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -240,7 +240,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			
 			if (this.colourButton4.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[4].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[4].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -248,7 +248,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton5.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[5].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[5].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -256,7 +256,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton6.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[6].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[6].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -264,7 +264,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 
 			if (this.colourButton7.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColours(false)[7].getColouredName())
+					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[7].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -347,14 +347,14 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			this.toggleEntityButton = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexE[0], this.getScreenCoords()[1] + indexE[1], indexE[2], true, true, i, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.toggleEntityButton, isLeftClick); }));
 			this.toggleParticlesButton = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexP[0], this.getScreenCoords()[1] + indexP[1], indexP[2], true, true, blockEntity.showParticles ? 1 : 2, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.toggleParticlesButton, isLeftClick); }));
 			
-			this.colourButton0 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[0], this.getScreenCoords()[0] + indexCs[0][0], this.getScreenCoords()[1] + indexCs[0][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton0, isLeftClick); }));
-			this.colourButton1 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[1], this.getScreenCoords()[0] + indexCs[1][0], this.getScreenCoords()[1] + indexCs[1][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton1, isLeftClick); }));
-			this.colourButton2 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[2], this.getScreenCoords()[0] + indexCs[2][0], this.getScreenCoords()[1] + indexCs[2][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton2, isLeftClick); }));
-			this.colourButton3 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[3], this.getScreenCoords()[0] + indexCs[3][0], this.getScreenCoords()[1] + indexCs[3][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton3, isLeftClick); }));
-			this.colourButton4 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[4], this.getScreenCoords()[0] + indexCs[4][0], this.getScreenCoords()[1] + indexCs[4][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton4, isLeftClick); }));
-			this.colourButton5 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[5], this.getScreenCoords()[0] + indexCs[5][0], this.getScreenCoords()[1] + indexCs[5][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton5, isLeftClick); }));
-			this.colourButton6 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[6], this.getScreenCoords()[0] + indexCs[6][0], this.getScreenCoords()[1] + indexCs[6][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton6, isLeftClick); }));
-			this.colourButton7 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColours(false)[7], this.getScreenCoords()[0] + indexCs[7][0], this.getScreenCoords()[1] + indexCs[7][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton7, isLeftClick); }));
+			this.colourButton0 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[0], this.getScreenCoords()[0] + indexCs[0][0], this.getScreenCoords()[1] + indexCs[0][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton0, isLeftClick); }));
+			this.colourButton1 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[1], this.getScreenCoords()[0] + indexCs[1][0], this.getScreenCoords()[1] + indexCs[1][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton1, isLeftClick); }));
+			this.colourButton2 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[2], this.getScreenCoords()[0] + indexCs[2][0], this.getScreenCoords()[1] + indexCs[2][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton2, isLeftClick); }));
+			this.colourButton3 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[3], this.getScreenCoords()[0] + indexCs[3][0], this.getScreenCoords()[1] + indexCs[3][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton3, isLeftClick); }));
+			this.colourButton4 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[4], this.getScreenCoords()[0] + indexCs[4][0], this.getScreenCoords()[1] + indexCs[4][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton4, isLeftClick); }));
+			this.colourButton5 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[5], this.getScreenCoords()[0] + indexCs[5][0], this.getScreenCoords()[1] + indexCs[5][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton5, isLeftClick); }));
+			this.colourButton6 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[6], this.getScreenCoords()[0] + indexCs[6][0], this.getScreenCoords()[1] + indexCs[6][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton6, isLeftClick); }));
+			this.colourButton7 = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColoursComp(false)[7], this.getScreenCoords()[0] + indexCs[7][0], this.getScreenCoords()[1] + indexCs[7][1], colSize[0], colSize[1], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton7, isLeftClick); }));
 			
 			this.cycleSlotButtonDown = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexCyU[0], this.getScreenCoords()[1] + indexCyU[1], indexCyU[2], true, true, 7, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(cycleSlotButtonDown, isLeftClick); }));
 			this.cycleSlotButtonUp = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexCyD[0], this.getScreenCoords()[1] + indexCyD[1], indexCyD[2], true, true, 6, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(cycleSlotButtonUp, isLeftClick); }));
@@ -389,42 +389,42 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 				}
 				
 				if (button.equals(this.colourButton0)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[0].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[0].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 0));
 				}
 
 				if (button.equals(this.colourButton1)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[1].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[1].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 1));
 				}
 
 				if (button.equals(this.colourButton2)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[2].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[2].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 2));
 				}
 
 				if (button.equals(this.colourButton3)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[3].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[3].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 3));
 				}
 
 				if (button.equals(this.colourButton4)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[4].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[4].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 4));
 				}
 
 				if (button.equals(this.colourButton5)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[5].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[5].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 5));
 				}
 
 				if (button.equals(this.colourButton6)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[6].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[6].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 6));
 				}
 
 				if (button.equals(this.colourButton7)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[7].getNextVanillaColour(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[7].getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 7));
 				}
 
@@ -444,42 +444,42 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 				}
 	
 				if (button.equals(this.colourButton0)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[0].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[0].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 0));
 				}
 
 				if (button.equals(this.colourButton1)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[1].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[1].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 1));
 				}
 
 				if (button.equals(this.colourButton2)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[2].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[2].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 2));
 				}
 
 				if (button.equals(this.colourButton3)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[3].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[3].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 3));
 				}
 
 				if (button.equals(this.colourButton4)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[4].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[4].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 4));
 				}
 
 				if (button.equals(this.colourButton5)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[5].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[5].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 5));
 				}
 
 				if (button.equals(this.colourButton6)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[6].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[6].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 6));
 				}
 
 				if (button.equals(this.colourButton7)) {
-					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColours(false)[7].getNextVanillaColourReverse(true);
+					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColoursComp(false)[7].getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, 7));
 				}
 			}

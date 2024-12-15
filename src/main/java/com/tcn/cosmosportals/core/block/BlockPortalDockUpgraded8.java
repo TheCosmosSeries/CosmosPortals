@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlockPortalDockUpgraded8 extends AbstractBlockPortalDock {
+public class BlockPortalDockUpgraded8 extends AbstractBlockPortalDock implements PortalFrameBlock, PortalFrameBlockNoUpdate {
 
 	public BlockPortalDockUpgraded8(BlockBehaviour.Properties properties) {
 		super(properties);

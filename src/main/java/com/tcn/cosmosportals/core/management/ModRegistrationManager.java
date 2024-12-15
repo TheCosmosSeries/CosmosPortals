@@ -16,29 +16,33 @@ import com.tcn.cosmosportals.client.container.ContainerPortalDock;
 import com.tcn.cosmosportals.client.container.ContainerPortalDockUpgraded4;
 import com.tcn.cosmosportals.client.container.ContainerPortalDockUpgraded8;
 import com.tcn.cosmosportals.client.renderer.RendererContainerWorkbench;
-import com.tcn.cosmosportals.client.renderer.RendererDockController4;
 import com.tcn.cosmosportals.client.renderer.RendererPortalDock;
+import com.tcn.cosmosportals.client.renderer.RendererPortalDockController4;
+import com.tcn.cosmosportals.client.renderer.RendererPortalDockController8;
 import com.tcn.cosmosportals.client.screen.ScreenContainerWorkbench;
 import com.tcn.cosmosportals.client.screen.ScreenPortalDock;
 import com.tcn.cosmosportals.client.screen.ScreenPortalDockUpgraded4;
 import com.tcn.cosmosportals.client.screen.ScreenPortalDockUpgraded8;
 import com.tcn.cosmosportals.core.block.BlockContainerWorkbench;
-import com.tcn.cosmosportals.core.block.BlockDockController;
 import com.tcn.cosmosportals.core.block.BlockPortal;
 import com.tcn.cosmosportals.core.block.BlockPortalDock;
+import com.tcn.cosmosportals.core.block.BlockPortalDockController4;
+import com.tcn.cosmosportals.core.block.BlockPortalDockController8;
 import com.tcn.cosmosportals.core.block.BlockPortalDockUpgraded4;
 import com.tcn.cosmosportals.core.block.BlockPortalDockUpgraded8;
 import com.tcn.cosmosportals.core.block.BlockPortalFrame;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityContainerWorkbench;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityDockController;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortal;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDock;
+import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController4;
+import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController8;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockUpgraded4;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockUpgraded8;
 import com.tcn.cosmosportals.core.item.BlockItemContainerWorkbench;
-import com.tcn.cosmosportals.core.item.BlockItemDockController;
 import com.tcn.cosmosportals.core.item.BlockItemPortal;
 import com.tcn.cosmosportals.core.item.BlockItemPortalDock;
+import com.tcn.cosmosportals.core.item.BlockItemPortalDockController4;
+import com.tcn.cosmosportals.core.item.BlockItemPortalDockController8;
 import com.tcn.cosmosportals.core.item.BlockItemPortalDockUpgraded4;
 import com.tcn.cosmosportals.core.item.BlockItemPortalDockUpgraded8;
 import com.tcn.cosmosportals.core.item.BlockItemPortalFrame;
@@ -142,9 +146,13 @@ public class ModRegistrationManager {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntityPortalDockUpgraded8>> BLOCK_ENTITY_TYPE_PORTAL_DOCK_UPGRADED8 = BLOCK_ENTITY_TYPES.register("tile_portal_dock_upgraded8", () -> BlockEntityType.Builder.of(BlockEntityPortalDockUpgraded8::new, PORTAL_DOCK_UPGRADED8.get()).build(null));
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerPortalDockUpgraded8>> MENU_TYPE_PORTAL_DOCK_UPGRADED8 = MENU_TYPES.register("container_portal_dock_upgraded8", () -> IMenuTypeExtension.create(ContainerPortalDockUpgraded8::new));
 	
-	public static final DeferredBlock<Block> DOCK_CONTROLLER = BLOCKS.register("block_dock_controller", () -> new BlockDockController(BlockBehaviour.Properties.of()));
-	public static final DeferredItem<Item> ITEM_DOCK_CONTROLLER = addToTab(ITEMS.register("block_dock_controller", () -> new BlockItemDockController(DOCK_CONTROLLER.get(), new Item.Properties())));
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntityDockController>> BLOCK_ENTITY_TYPE_DOCK_CONTROLLER = BLOCK_ENTITY_TYPES.register("tile_dock_controller", () -> BlockEntityType.Builder.of(BlockEntityDockController::new, DOCK_CONTROLLER.get()).build(null));
+	public static final DeferredBlock<Block> PORTAL_DOCK_CONTROLLER4 = BLOCKS.register("block_dock_controller", () -> new BlockPortalDockController4(BlockBehaviour.Properties.of().sound(SoundType.METAL).requiresCorrectToolForDrops().strength(6.0F, 8.0F).lightLevel((state) -> { return 7; } )));
+	public static final DeferredItem<Item> ITEM_PORTAL_DOCK_CONTROLLER4 = addToTab(ITEMS.register("block_dock_controller", () -> new BlockItemPortalDockController4(PORTAL_DOCK_CONTROLLER4.get(), new Item.Properties())));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntityPortalDockController4>> BLOCK_ENTITY_TYPE_PORTAL_DOCK_CONTROLLER4 = BLOCK_ENTITY_TYPES.register("tile_dock_controller", () -> BlockEntityType.Builder.of(BlockEntityPortalDockController4::new, PORTAL_DOCK_CONTROLLER4.get()).build(null));
+
+	public static final DeferredBlock<Block> PORTAL_DOCK_CONTROLLER8 = BLOCKS.register("block_dock_controller8", () -> new BlockPortalDockController8(BlockBehaviour.Properties.of().sound(SoundType.METAL).requiresCorrectToolForDrops().strength(6.0F, 8.0F).lightLevel((state) -> { return 7; } )));
+	public static final DeferredItem<Item> ITEM_PORTAL_DOCK_CONTROLLER8 = addToTab(ITEMS.register("block_dock_controller8", () -> new BlockItemPortalDockController8(PORTAL_DOCK_CONTROLLER8.get(), new Item.Properties())));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntityPortalDockController8>> BLOCK_ENTITY_TYPE_PORTAL_DOCK_CONTROLLER8 = BLOCK_ENTITY_TYPES.register("tile_dock_controller8", () -> BlockEntityType.Builder.of(BlockEntityPortalDockController8::new, PORTAL_DOCK_CONTROLLER8.get()).build(null));
 	
 	public static final DeferredBlock<Block> CONTAINER_WORKBENCH = BLOCKS.register("block_container_workbench", () -> new BlockContainerWorkbench(BlockBehaviour.Properties.of().sound(SoundType.METAL).requiresCorrectToolForDrops().strength(4.0F,6.0F).noOcclusion()));
 	public static final DeferredItem<Item> ITEM_CONTAINER_WORKBENCH = addToTab(ITEMS.register("block_container_workbench", () -> new BlockItemContainerWorkbench(CONTAINER_WORKBENCH.get(), new Item.Properties())));
@@ -167,10 +175,14 @@ public class ModRegistrationManager {
 	@SubscribeEvent
 	public static void onBlockEntityRendererRegistry(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_PORTAL_DOCK.get(), RendererPortalDock::new);
+		
 		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_PORTAL_DOCK_UPGRADED.get(), RendererPortalDock::new);
 		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_PORTAL_DOCK_UPGRADED8.get(), RendererPortalDock::new);
+		
 		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_CONTAINER_WORKBENCH.get(), RendererContainerWorkbench::new);
-		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_DOCK_CONTROLLER.get(), RendererDockController4::new);
+		
+		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_PORTAL_DOCK_CONTROLLER4.get(), RendererPortalDockController4::new);
+		event.registerBlockEntityRenderer(BLOCK_ENTITY_TYPE_PORTAL_DOCK_CONTROLLER8.get(), RendererPortalDockController8::new);
 		CosmosPortals.CONSOLE.startup("BlockEntityRenderer Registration complete.");
 	}
 	
@@ -183,7 +195,8 @@ public class ModRegistrationManager {
 			PORTAL_DOCK_UPGRADED.get(),
 			PORTAL_DOCK_UPGRADED8.get(),
 			BLOCK_PORTAL.get(),
-			DOCK_CONTROLLER.get()
+			PORTAL_DOCK_CONTROLLER4.get(),
+			PORTAL_DOCK_CONTROLLER8.get()
 		);
 	}
 
@@ -194,25 +207,26 @@ public class ModRegistrationManager {
 			DIMENSION_CONTAINER_LINKED.get(),
 			PORTAL_FRAME.get(),
 			PORTAL_DOCK.get(),
+			
 			PORTAL_DOCK_UPGRADED.get(),
 			PORTAL_DOCK_UPGRADED8.get(),
-			DOCK_CONTROLLER.get()
+			
+			PORTAL_DOCK_CONTROLLER4.get(),
+			PORTAL_DOCK_CONTROLLER8.get()
 		);
 	}
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) {
-		/*CosmosRuntimeHelper.registerSpecialModels(event, CosmosPortals.MOD_ID, 
-			"model/dock_controller_button"
-		);*/
-	}
+	public static void onModelRegistryEvent(ModelEvent.RegisterAdditional event) { }
 	
 	@SubscribeEvent
 	public static void registerMenuScreensEvent(RegisterMenuScreensEvent event) {
 		event.register(MENU_TYPE_PORTAL_DOCK.get(), ScreenPortalDock::new);
+		
 		event.register(MENU_TYPE_PORTAL_DOCK_UPGRADED.get(), ScreenPortalDockUpgraded4::new);
 		event.register(MENU_TYPE_PORTAL_DOCK_UPGRADED8.get(), ScreenPortalDockUpgraded8::new);
+		
 		event.register(MENU_TYPE_CONTAINER_WORKBENCH.get(), ScreenContainerWorkbench::new);
 	}
 	
@@ -225,7 +239,7 @@ public class ModRegistrationManager {
 		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK.get());
 		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED.get());
 		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED8.get());
-		CosmosRuntimeHelper.setRenderLayers(translucent, BLOCK_PORTAL.get());
+		CosmosRuntimeHelper.setRenderLayers(translucent,  BLOCK_PORTAL.get());
 	}
 
     public static <T extends Item> DeferredItem<T> addToTab(DeferredItem<T> itemLike) {

@@ -154,7 +154,13 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			
-			if (indexIn >= 0 && indexIn <= 2) {
+			if (indexIn >= 0 && indexIn <= 1) {
+				if (!this.moveItemStackTo(itemstack1, 3, this.slots.size() - 9, false)) {
+					if (!this.moveItemStackTo(itemstack1, this.slots.size() - 9, this.slots.size(), false)) {
+						return ItemStack.EMPTY;
+					}
+				}
+			} if (indexIn == 2) {
 				if (!this.moveItemStackTo(itemstack1, 3, this.slots.size() - 9, false)) {
 					if (!this.moveItemStackTo(itemstack1, this.slots.size() - 9, this.slots.size(), false)) {
 						return ItemStack.EMPTY;

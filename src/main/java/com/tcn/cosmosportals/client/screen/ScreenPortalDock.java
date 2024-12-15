@@ -70,9 +70,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 		
 		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityPortalDock) {
-			BlockEntityPortalDock blockEntity = (BlockEntityPortalDock) entity;
-
+		if (entity instanceof BlockEntityPortalDock blockEntity) {
 			int portalColour = blockEntity.getDisplayColour();
 			float frame[] = ComponentColour.rgbFloatArray(ComponentColour.GRAY);
 			float[] colour = new float[] {((portalColour >> 16) & 255) / 255.0F, ((portalColour >> 8) & 255) / 255.0F, (portalColour & 255) / 255.0F, 1F};
@@ -119,9 +117,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	public void renderStandardHoverEffect(GuiGraphics graphics, Style style, int mouseX, int mouseY) {
 		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityPortalDock) {
-			BlockEntityPortalDock blockEntity = (BlockEntityPortalDock) entity;
-			
+		if (entity instanceof BlockEntityPortalDock blockEntity) {
 			if (this.toggleLabelButton.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.label_info"), 
 					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.label_value", " ")
@@ -181,9 +177,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 		super.addButtons();
 		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityPortalDock) {
-			BlockEntityPortalDock blockEntity = (BlockEntityPortalDock) entity;
-			
+		if (entity instanceof BlockEntityPortalDock blockEntity) {
 			int i = 0;
 			int j = blockEntity.allowedEntities.getIndex();
 			
@@ -306,9 +300,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	public void renderPortalLabel(GuiGraphics graphics) {
 		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityPortalDock) {
-			BlockEntityPortalDock blockEntity = (BlockEntityPortalDock) entity;
-			
+		if (entity instanceof BlockEntityPortalDock blockEntity) {
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				int portalColour = blockEntity.getDisplayColour();
 				

@@ -74,16 +74,16 @@ public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock, 
 	}
 
 	@Override
-	public void randomTick(BlockState stateIn, ServerLevel worldIn, BlockPos posIn, RandomSource random) {
-		if (worldIn.dimensionType().natural() && worldIn.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId()) {
-			while (worldIn.getBlockState(posIn).is(this)) {
+	public void randomTick(BlockState stateIn, ServerLevel levelIn, BlockPos posIn, RandomSource random) {
+		if (levelIn.dimensionType().natural() && levelIn.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && random.nextInt(2000) < levelIn.getDifficulty().getId()) {
+			while (levelIn.getBlockState(posIn).is(this)) {
 				posIn = posIn.below();
 			}
 		}
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState stateIn, BlockGetter worldIn, BlockPos posIn, CollisionContext context) {
+	public VoxelShape getShape(BlockState stateIn, BlockGetter levelIn, BlockPos posIn, CollisionContext context) {
 		switch ((Direction.Axis) stateIn.getValue(AXIS)) {
 		case Z:
 			return Z_AXIS_AABB;
@@ -94,32 +94,35 @@ public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock, 
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction directionIn, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction directionIn, BlockState facingState, LevelAccessor levelIn, BlockPos currentPos, BlockPos facingPos) {
 		Direction.Axis direction$axis = directionIn.getAxis();
 		Direction.Axis direction$axis1 = stateIn.getValue(AXIS);
 		boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
 		
-		return !flag && !facingState.is(this) && !(new CustomPortalShape(worldIn, currentPos, direction$axis1)).isComplete() ? Blocks.AIR.defaultBlockState() : 
-			stateIn.setValue(UP, this.canSideConnect(worldIn, currentPos, Direction.UP, null))
-				.setValue(DOWN, this.canSideConnect(worldIn, currentPos, Direction.DOWN, null))
-				.setValue(LEFT, this.canSideConnect(worldIn, currentPos, null, "left"))
-				.setValue(RIGHT, this.canSideConnect(worldIn, currentPos, null, "right"));
+		return !flag && !facingState.is(this) && !(new CustomPortalShape(levelIn, currentPos, direction$axis1)).isComplete(facingState.getBlock() instanceof PortalFrameBlockNoUpdate) ? Blocks.AIR.defaultBlockState() : stateIn
+			.setValue(UP, this.canSideConnect(levelIn, currentPos, Direction.UP, null))
+			.setValue(DOWN, this.canSideConnect(levelIn, currentPos, Direction.DOWN, null))
+			.setValue(LEFT, this.canSideConnect(levelIn, currentPos, null, "left"))
+			.setValue(RIGHT, this.canSideConnect(levelIn, currentPos, null, "right"));
 	}
 
-	public BlockState updateState(BlockState stateIn, BlockPos currentPos, Level worldIn) {
-		return stateIn.setValue(UP, this.canSideConnect(worldIn, currentPos, Direction.UP, null))
-				.setValue(DOWN, this.canSideConnect(worldIn, currentPos, Direction.DOWN, null))
-				.setValue(LEFT, this.canSideConnect(worldIn, currentPos, null, "left"))
-				.setValue(RIGHT, this.canSideConnect(worldIn, currentPos, null, "right"));
+	@Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) { }
+
+	public BlockState updateState(BlockState stateIn, BlockPos currentPos, Level levelIn) {
+		return stateIn.setValue(UP, this.canSideConnect(levelIn, currentPos, Direction.UP, null))
+				.setValue(DOWN, this.canSideConnect(levelIn, currentPos, Direction.DOWN, null))
+				.setValue(LEFT, this.canSideConnect(levelIn, currentPos, null, "left"))
+				.setValue(RIGHT, this.canSideConnect(levelIn, currentPos, null, "right"));
 	}
 	
 	@Override
-	public void entityInside(BlockState stateIn, Level worldIn, BlockPos posIn, Entity entityIn) {
-		if (!worldIn.isClientSide) {
-			BlockEntity tile = worldIn.getBlockEntity(posIn);
+	public void entityInside(BlockState stateIn, Level levelIn, BlockPos posIn, Entity entityIn) {
+		if (!levelIn.isClientSide) {
+			BlockEntity entity = levelIn.getBlockEntity(posIn);
 			
-			if (tile != null && tile instanceof BlockEntityPortal) {
-				((BlockEntityPortal) tile).entityInside(stateIn, worldIn, posIn, entityIn);
+			if (entity != null && entity instanceof BlockEntityPortal blockEntity) {
+				blockEntity.entityInside(stateIn, levelIn, posIn, entityIn);
 			}
 		}
 	}
@@ -159,11 +162,11 @@ public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock, 
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos posIn, RandomSource randIn) {
-		BlockEntity tile = worldIn.getBlockEntity(posIn);
+	public void animateTick(BlockState stateIn, Level levelIn, BlockPos posIn, RandomSource randIn) {
+		BlockEntity entity = levelIn.getBlockEntity(posIn);
 		
-		if (tile instanceof BlockEntityPortal) {
-			((BlockEntityPortal) tile).animateTick(stateIn, worldIn, posIn, randIn);
+		if (entity instanceof BlockEntityPortal blockEntity) {
+			blockEntity.animateTick(stateIn, levelIn, posIn, randIn);
 		}
 	}
 
@@ -208,7 +211,7 @@ public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock, 
 	}
 
 	@Nullable
-	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> p_152133_, BlockEntityType<E> p_152134_, BlockEntityTicker<? super E> p_152135_) {
-		return p_152134_ == p_152133_ ? (BlockEntityTicker<A>) p_152135_ : null;
+	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> entityTypeIn, BlockEntityType<E> entityTypeIn2, BlockEntityTicker<? super E> entityIn) {
+		return entityTypeIn2 == entityTypeIn ? (BlockEntityTicker<A>) entityIn : null;
 	}
 }

@@ -171,20 +171,18 @@ public class CustomPortalShape {
 				this.level.setBlock(pos, blockstate, 18);
 				
 				if (this.level.getBlockEntity(pos) != null) {
-					BlockEntity tile = this.level.getBlockEntity(pos);
+					BlockEntity entity = this.level.getBlockEntity(pos);
 					
-					if (tile instanceof BlockEntityPortal) {
-						BlockEntityPortal portal_tile = (BlockEntityPortal) tile;
+					if (entity instanceof BlockEntityPortal blockEntity) {
+						blockEntity.setDestDimension(dimensionIn);
+						blockEntity.setDestInfo(teleportPos, yawIn, pitchIn);
+						blockEntity.setDisplayColour(colourIn);
 						
-						portal_tile.setDestDimension(dimensionIn);
-						portal_tile.setDestInfo(teleportPos, yawIn, pitchIn);
-						portal_tile.setDisplayColour(colourIn);
+						blockEntity.setPlaySound(playSound);
+						blockEntity.setAllowedEntities(allowEntities);
+						blockEntity.setShowParticles(showParticles);
 						
-						portal_tile.setPlaySound(playSound);
-						portal_tile.setAllowedEntities(allowEntities);
-						portal_tile.setShowParticles(showParticles);
-						
-						portal_tile.sendUpdates(true);
+						blockEntity.sendUpdates(true);
 					}
 				}
 			}
@@ -197,12 +195,10 @@ public class CustomPortalShape {
 		BlockPos.betweenClosed(this.bottomLeft,	this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1)).forEach((pos) -> {
 			if ((worldIn.getBlockState(pos).getBlock() instanceof BlockPortal)) {
 				if (worldIn.getBlockEntity(pos) != null) {
-					BlockEntity tile = worldIn.getBlockEntity(pos);
+					BlockEntity entity = worldIn.getBlockEntity(pos);
 					
-					if (tile instanceof BlockEntityPortal) {
-						BlockEntityPortal portal_tile = (BlockEntityPortal) tile;
-
-						if (portal_tile.destDimension.equals(dimensionIn)) {
+					if (entity instanceof BlockEntityPortal blockEntity) {
+						if (blockEntity.destDimension.equals(dimensionIn)) {
 							blockMap.put(blockMap.size(), new BlockPos(pos));
 						}
 					}
@@ -213,8 +209,8 @@ public class CustomPortalShape {
 		return blockMap;
 	}
 
-	public boolean isComplete() {
-		return this.isValid() && this.numPortalBlocks == (this.width * this.height);
+	public boolean isComplete(boolean ignoreUpdate) {
+		return this.isValid() && (!ignoreUpdate && this.numPortalBlocks == (this.width * this.height));
 	}
 
 	public static Vec3 getRelativePosition(BlockUtil.FoundRectangle resultIn, Direction.Axis axisIn, Vec3 vecIn, EntityDimensions entitySizeIn) {
@@ -242,25 +238,4 @@ public class CustomPortalShape {
 		double d3 = vecIn.get(direction$axis1) - ((double) blockpos.get(direction$axis1) + 0.5D);
 		return new Vec3(d2, d4, d3);
 	}
-	/*
-	public static PortalInfo createPortalInfo(ServerLevel serverWorldIn, BlockUtil.FoundRectangle resultIn, Direction.Axis axisIn, Vec3 vecIn, EntityDimensions entitySizeIn, Vec3 speedIn, float yRot, float xRot) {
-		BlockPos blockpos = resultIn.minCorner;
-		BlockState blockstate = serverWorldIn.getBlockState(blockpos);
-		Direction.Axis direction$axis = blockstate.getValue(BlockStateProperties.HORIZONTAL_AXIS);
-		
-		double d0 = (double) resultIn.axis1Size;
-		double d1 = (double) resultIn.axis2Size;
-		int i = axisIn == direction$axis ? 0 : 90;
-
-		Vec3 vector3d = axisIn == direction$axis ? speedIn : new Vec3(speedIn.z, speedIn.y, -speedIn.x);
-
-		double d2 = (double) entitySizeIn.width / 2.0D + (d0 - (double) entitySizeIn.width) * vecIn.x();
-		double d3 = (d1 - (double) entitySizeIn.height) * vecIn.y();
-		double d4 = 0.5D + vecIn.z();
-		boolean flag = direction$axis == Direction.Axis.X;
-
-		Vec3 vector3d1 = new Vec3((double) blockpos.getX() + (flag ? d2 : d4), (double) blockpos.getY() + d3, (double) blockpos.getZ() + (flag ? d4 : d2));
-
-		return new PortalInfo(vector3d1, vector3d, yRot + (float) i, xRot);
-	}*/
 }

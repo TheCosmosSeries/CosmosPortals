@@ -21,11 +21,7 @@ public class BlockPortalFrame extends CosmosBlockConnected implements PortalFram
 				return false;
 			} else if (orig.getBlock().equals(conn.getBlock())) {
 				return true;
-			} else if (conn.getBlock() instanceof BlockPortalDock) {
-				return true;
-			} else if (conn.getBlock() instanceof BlockPortalDockUpgraded4) {
-				return true;
-			} else if (conn.getBlock() instanceof BlockDockController) {
+			} else if (conn.getBlock() instanceof PortalFrameBlock) {
 				return true;
 			} else {
 				return false;

@@ -187,13 +187,14 @@ public class ItemPortalContainer extends CosmosItem {
 					int colour = 0;
 
 					if (dim_path.equals("the_nether")) {
-						colour = ComponentColour.RED.decOpaque();
+						colour = ComponentColour.RED.dec();
 					} else if (dim_path.equals("the_end")) {
-						colour = ComponentColour.END.decOpaque();
+						colour = ComponentColour.END.dec();
 					} else if (dim_path.equals("overworld")) {
-						colour = ComponentColour.GREEN.decOpaque();
+						colour = ComponentColour.GREEN.dec();
 					} else {
 						colour = biome.value().getGrassColor(player_pos.getX(), player_pos.getZ());
+						System.out.println(colour);
 					}
 					
 					dimension_data.putInt("colour", colour);

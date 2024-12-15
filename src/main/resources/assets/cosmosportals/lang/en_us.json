@@ -39,7 +39,8 @@
 	
 	"block.cosmosportals.block_container_workbench": "Container Workbench",
 	
-	"block.cosmosportals.block_dock_controller": "Dock Controller",
+	"block.cosmosportals.block_dock_controller": "Dock Controller [4]",
+	"block.cosmosportals.block_dock_controller8": "Dock Controller [8]",
 
 	"cosmosportals.modid": "Cosmos Portals",
 	
@@ -277,7 +278,8 @@
 	"cosmosportals.block_info.workbench_two": "To use: Right-click to to open the UI.",
 	"cosmosportals.block_info.workbench_limit": "You must provide unlinked Dimension Containers.",
 	
-	"cosmosportals.block_info.dock_controller": "Cosmic Dock Controller",
+	"cosmosportals.block_info.dock_controller": "Cosmic Dock Controller [4]",
+	"cosmosportals.block_info.dock_controller8": "Cosmic Dock Controller [8]",
 	"cosmosportals.block_info.dock_controller_one": "Portal Dock Controller. Used to control a Dock.",
 	"cosmosportals.block_info.dock_controller_two": "To use: Shift-right click with a Cosmic Wrench to link a Portal Dock.",
 	"cosmosportals.block_info.dock_controller_three": "Once linked, right click a numbered button to select that Slot in the Dock.",
