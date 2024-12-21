@@ -211,7 +211,7 @@ public class BlockEntityPortal extends BlockEntity {
 										
 										if (entityToTeleport.getType().equals(EntityType.WARDEN)) {
 											if (ModConfigManager.getInstance().getAllowWardenTeleport()) {
-													entityToTeleport.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+												entityToTeleport.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 											}
 										} else {
 											entityToTeleport.teleportTo(targetPos.getX(), targetPos.getY(), targetPos.getZ());
@@ -316,14 +316,12 @@ public class BlockEntityPortal extends BlockEntity {
 					d5 = (double) (randIn.nextFloat() * 2.0F * (float) j);
 				}
 				
-				BlockEntity tile = worldIn.getBlockEntity(posIn);
+				BlockEntity entity = worldIn.getBlockEntity(posIn);
 				
-				if (tile instanceof BlockEntityPortal) {
-					BlockEntityPortal tileEntity = (BlockEntityPortal) tile;
-					
-					if (tileEntity.destDimension.equals(Level.NETHER.location())) {
+				if (entity instanceof BlockEntityPortal blockEntity) {
+					if (blockEntity.destDimension.equals(Level.NETHER.location())) {
 						worldIn.addParticle(ParticleTypes.CRIMSON_SPORE, d0, d1, d2, d3, d4, d5);
-					} else if (tileEntity.destDimension.equals(Level.END.location())) {
+					} else if (blockEntity.destDimension.equals(Level.END.location())) {
 						worldIn.addParticle(ParticleTypes.ASH, d0, d1, d2, d3, d4, d5);
 					} else {
 						worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);

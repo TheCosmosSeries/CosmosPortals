@@ -367,7 +367,7 @@ public class RendererPortalDockController8 implements BlockEntityRenderer<BlockE
 					int currentIndex = -1;
 					int maxIndex = -1;
 					String modifier = "";
-					boolean[] slotFilled = new boolean[] { false, false, false, false, false, false, false, false };
+					boolean[] slotFilled = new boolean[] { false, false, false, false, false, false, false, false, false };
 					
 					if (entityIn.isLinked()) {
 						AbstractBlockEntityPortalDock portalEntity = (AbstractBlockEntityPortalDock) testEntity;
@@ -376,7 +376,7 @@ public class RendererPortalDockController8 implements BlockEntityRenderer<BlockE
 							currentIndex = portalEntity.getCurrentSlotIndex();
 							maxIndex = portalEntity.getMaxSlotIndex();
 
-							for (int i = 0; i < maxIndex + 1; i++) {
+							for (int i = 0; i <= maxIndex; i++) {
 								slotFilled[i] = portalEntity.getItem(i).isEmpty();
 							}
 						}

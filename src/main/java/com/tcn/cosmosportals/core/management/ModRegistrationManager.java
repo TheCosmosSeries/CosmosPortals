@@ -96,8 +96,7 @@ public class ModRegistrationManager {
 		() -> CreativeModeTab.builder()
 		.title(ComponentHelper.style(ComponentColour.GREEN, "Cosmos Portals"))
 		.icon(() -> new ItemStack(ModRegistrationManager.DIMENSION_CONTAINER.get()))
-		.displayItems((params, output) -> TAB_ITEMS.forEach(itemLike -> output.accept(itemLike.get())))
-		.build()
+		.displayItems((params, output) -> TAB_ITEMS.forEach(itemLike -> output.accept(itemLike.get()))).build()
 	);
 	
 	/** - ITEMS - */
