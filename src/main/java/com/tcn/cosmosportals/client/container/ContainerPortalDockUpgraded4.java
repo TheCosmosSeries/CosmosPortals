@@ -19,8 +19,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 public class ContainerPortalDockUpgraded4 extends CosmosContainerMenuBlockEntity {
 
-	protected Container copy;
-	
 	private int START_INDEX = 0;
 	private int END_INDEX = 3;
 
@@ -30,8 +28,6 @@ public class ContainerPortalDockUpgraded4 extends CosmosContainerMenuBlockEntity
 
 	public ContainerPortalDockUpgraded4(int indexIn, Inventory playerInventoryIn, Container contentsIn, ContainerLevelAccess accessIn, BlockPos posIn) {
 		super(ModRegistrationManager.MENU_TYPE_PORTAL_DOCK_UPGRADED.get(), indexIn, playerInventoryIn, accessIn, posIn);
-		
-		this.copy = contentsIn;
 		
 		/** - @ContainerSlots - */
 		this.addSlot(new SlotSpecifiedItem(contentsIn, 0, 146, 45, ModRegistrationManager.DIMENSION_CONTAINER_LINKED.get(), 1) {
@@ -90,8 +86,6 @@ public class ContainerPortalDockUpgraded4 extends CosmosContainerMenuBlockEntity
 	@Override
 	public void setItem(int i, int j, ItemStack stackIn) {
 		super.setItem(i, j, stackIn);
-		copy.setItem(i, stackIn);
-		copy.setChanged();
 		this.broadcastChanges();
 	}
 	
@@ -109,7 +103,6 @@ public class ContainerPortalDockUpgraded4 extends CosmosContainerMenuBlockEntity
 	@Override
 	public void slotsChanged(Container inventoryIn) {
 		super.slotsChanged(inventoryIn);
-		copy.setChanged();
 		this.broadcastChanges();
 	}
 	

@@ -2,7 +2,7 @@ package com.tcn.cosmosportals.client.screen;
 
 import java.util.Arrays;
 
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenUIModeBE;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType.TYPE;
@@ -113,11 +113,9 @@ public class ScreenContainerWorkbench extends CosmosScreenUIModeBE<ContainerCont
 	protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
 		super.renderBg(graphics, partialTicks, mouseX, mouseY);
 		
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityContainerWorkbench blockEntity) {
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.WORKBENCH_SLOTS);
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.WORKBENCH_OVERLAY);
+		if (this.getBlockEntity() instanceof BlockEntityContainerWorkbench blockEntity) {
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.WORKBENCH_SLOTS);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.WORKBENCH_OVERLAY);
 		}
 
 		this.textField.render(graphics, mouseX, mouseY, CosmosUISystem.DEFAULT_COLOUR_FONT_LIST);
@@ -195,9 +193,7 @@ public class ScreenContainerWorkbench extends CosmosScreenUIModeBE<ContainerCont
 	@Override
 	protected void addButtons() {
 		super.addButtons();
-		BlockEntity entity = this.getBlockEntity();
-
-		if (entity instanceof BlockEntityContainerWorkbench blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityContainerWorkbench blockEntity) {
 			this.clearButton = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexCl[0], this.getScreenCoords()[1] + indexCl[1], indexCl[2], !(this.textField.getValue().isEmpty()), true, 14, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.clearButton, isLeftClick);}));
 			this.applyButton = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexA[0], this.getScreenCoords()[1] + indexA[1], indexA[2], true, true, 1, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.applyButton, isLeftClick); }));
 			this.colourButton = this.addRenderableWidget(new CosmosColourButton(blockEntity.getCustomColour(), this.getScreenCoords()[0] + indexC[0], this.getScreenCoords()[1] + indexC[1], indexC[2], true, true, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.colourButton, isLeftClick); }));
@@ -207,9 +203,8 @@ public class ScreenContainerWorkbench extends CosmosScreenUIModeBE<ContainerCont
 	@Override
 	public void clickButton(Button button, boolean isLeftClick) {
 		super.clickButton(button, isLeftClick);
-		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityContainerWorkbench blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityContainerWorkbench blockEntity) {
 			if (isLeftClick) {
 				if (button.equals(this.applyButton)) {
 					PacketDistributor.sendToServer(new PacketWorkbenchName(this.menu.getBlockPos(), this.textField.getValue()));
@@ -242,7 +237,6 @@ public class ScreenContainerWorkbench extends CosmosScreenUIModeBE<ContainerCont
 	@Override
 	public void initEditBox() {
 		super.initEditBox();
-		//this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
         this.textField = new EditBox(this.font, this.getScreenCoords()[0] + this.textFieldI[0], this.getScreenCoords()[1] + this.textFieldI[1], this.textFieldI[2], this.textFieldI[3], ComponentHelper.comp("Portal Name Entry"));
 		this.textField.setMaxLength(12);
 		this.textField.setTextColor(CosmosUISystem.DEFAULT_COLOUR_FONT_LIST);

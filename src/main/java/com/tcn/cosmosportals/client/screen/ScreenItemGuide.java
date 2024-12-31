@@ -3,8 +3,7 @@ package com.tcn.cosmosportals.client.screen;
 import java.util.Arrays;
 import java.util.UUID;
 
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem.FONT;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonUIMode;
 import com.tcn.cosmoslibrary.common.enums.EnumUIMode;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
@@ -87,12 +86,12 @@ public class ScreenItemGuide extends Screen {
 	@Override
 	public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
 		super.renderBackground(graphics, mouseX, mouseY, partialTicks);
-		int[] screen_coords = CosmosUISystem.getScreenCoords(this, 202, 225);
+		int[] screen_coords = CosmosUISystem.Init.getScreenCoords(this, 202, 225);
 
 		if (this.stack != null) {
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, screen_coords, 0, 0, 0, 0, 202, 255, this.getUIMode(), CosmosPortalsReference.GUIDE);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, screen_coords, 0, 0, 0, 0, 202, 255, this.getUIMode(), CosmosPortalsReference.GUIDE);
 		} else {
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, screen_coords, 0, 0, 0, 0, 202, 255, EnumUIMode.DARK, CosmosPortalsReference.GUIDE);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, screen_coords, 0, 0, 0, 0, 202, 255, EnumUIMode.DARK, CosmosPortalsReference.GUIDE);
 		}
 		
 	}
@@ -100,18 +99,17 @@ public class ScreenItemGuide extends Screen {
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-		int[] screen_coords = CosmosUISystem.getScreenCoords(this, 202, 225);
-		//this.renderBackground(graphics);
-
+		int[] screen_coords = CosmosUISystem.Init.getScreenCoords(this, 202, 225);
+		
 		if (this.stack != null) {
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, screen_coords, 0, 0, 0, 0, 202, 255, this.getUIMode(), CosmosPortalsReference.GUIDE);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, screen_coords, 0, 0, 0, 0, 202, 255, this.getUIMode(), CosmosPortalsReference.GUIDE);
 		} else {
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, screen_coords, 0, 0, 0, 0, 202, 255, EnumUIMode.DARK, CosmosPortalsReference.GUIDE);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, screen_coords, 0, 0, 0, 0, 202, 255, EnumUIMode.DARK, CosmosPortalsReference.GUIDE);
 		}
 		
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		
-		CosmosUISystem.setTextureColour(new float[] { 5, 5, 5, 1 });
+		CosmosUISystem.Setup.setTextureColour(new float[] { 5, 5, 5, 1 });
 
 		if (this.flipTimer < 2000) {
 			this.flipTimer++;
@@ -127,168 +125,168 @@ public class ScreenItemGuide extends Screen {
 
 		this.drawRenderableWidgets();
 
-		FONT.drawString(graphics, font, screen_coords, 23, 10, true, ComponentHelper.style2(ComponentColour.BLACK, "cosmosportals.guide.page", Integer.toString(this.currPage)));
-		FONT.drawString(graphics, font, screen_coords, 76, 10, true, ComponentHelper.style(ComponentColour.BLACK, "underline", "cosmosportals.guide.heading"));
+		CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 23, 10, true, ComponentHelper.style2(ComponentColour.BLACK, "cosmosportals.guide.page", Integer.toString(this.currPage)));
+		CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 76, 10, true, ComponentHelper.style(ComponentColour.BLACK, "underline", "cosmosportals.guide.heading"));
 		
 		if (this.currPage == 0) {
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, -4, 0, ComponentColour.SCREEN_LIGHT.dec(), ComponentHelper.locString("cosmosportals.guide.one_body")
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, -4, 0, ComponentColour.SCREEN_LIGHT.dec(), ComponentHelper.locString("cosmosportals.guide.one_body")
 					+ ComponentHelper.locString(Value.GRAY + Value.UNDERLINE, "cosmosportals.guide.one_body_one") + ComponentHelper.locString("cosmosportals.guide.one_body_two"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 75, ComponentColour.SCREEN_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.one_body_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 75, ComponentColour.SCREEN_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.one_body_heading"), false);
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 120, true, ComponentHelper.style(ComponentColour.POCKET_PURPLE_LIGHT, "cosmosportals.guide.two_heading"));
-			FONT.drawString(graphics, font, screen_coords, 173, 120, true, ComponentHelper.style(ComponentColour.POCKET_PURPLE_LIGHT, "1"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 120, true, ComponentHelper.style(ComponentColour.POCKET_PURPLE_LIGHT, "cosmosportals.guide.two_heading"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 173, 120, true, ComponentHelper.style(ComponentColour.POCKET_PURPLE_LIGHT, "1"));
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 130, true, ComponentHelper.style(ComponentColour.CYAN, "cosmosportals.guide.three_heading"));
-			FONT.drawString(graphics, font, screen_coords, 161, 130, true, ComponentHelper.style(ComponentColour.CYAN, "2-5"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 130, true, ComponentHelper.style(ComponentColour.CYAN, "cosmosportals.guide.three_heading"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 161, 130, true, ComponentHelper.style(ComponentColour.CYAN, "2-5"));
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 140, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "cosmosportals.guide.four_heading"));
-			FONT.drawString(graphics, font, screen_coords, 161, 140, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "6-7"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 140, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "cosmosportals.guide.four_heading"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 161, 140, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "6-7"));
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 150, true, ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.guide.five_heading"));
-			FONT.drawString(graphics, font, screen_coords, 155, 150, true, ComponentHelper.style(ComponentColour.GREEN, "8-12"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 150, true, ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.guide.five_heading"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 155, 150, true, ComponentHelper.style(ComponentColour.GREEN, "8-12"));
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 160, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "cosmosportals.guide.six_heading"));
-			FONT.drawString(graphics, font, screen_coords, 149, 160, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "13-15"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 160, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "cosmosportals.guide.six_heading"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 149, 160, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "13-15"));
 			
-			FONT.drawString(graphics, font, screen_coords, 30, 170, true, ComponentHelper.style(ComponentColour.RED, "cosmosportals.guide.seven_tab"));
-			FONT.drawString(graphics, font, screen_coords, 167, 170, true, ComponentHelper.style(ComponentColour.RED, "16"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 30, 170, true, ComponentHelper.style(ComponentColour.RED, "cosmosportals.guide.seven_tab"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 167, 170, true, ComponentHelper.style(ComponentColour.RED, "16"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_one", " ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_one", " ]"), false);
 		} 
 		
 		else if (this.currPage == 1) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.POCKET_PURPLE_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.two_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.POCKET_PURPLE_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.two_heading"), false);
 			
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.two_body_one"));
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 65, ComponentColour.POCKET_PURPLE_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.two_body_two"), false);
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.two_body_one"));
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 65, ComponentColour.POCKET_PURPLE_LIGHT.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.two_body_two"), false);
 			
-			FONT.drawString(graphics, font, screen_coords, 25, 110, true, ComponentHelper.style(ComponentColour.CYAN, "cosmosportals.guide.two_sub_one"));
-			FONT.drawString(graphics, font, screen_coords, 25, 120, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "cosmosportals.guide.two_sub_two"));
-			FONT.drawString(graphics, font, screen_coords, 25, 130, true, ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.guide.two_sub_three"));
-			FONT.drawString(graphics, font, screen_coords, 25, 140, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "cosmosportals.guide.two_sub_four"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 25, 110, true, ComponentHelper.style(ComponentColour.CYAN, "cosmosportals.guide.two_sub_one"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 25, 120, true, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "cosmosportals.guide.two_sub_two"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 25, 130, true, ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.guide.two_sub_three"));
+			CosmosUISystem.FontRenderer.drawString(graphics, font, screen_coords, 25, 140, true, ComponentHelper.style(ComponentColour.DARK_GREEN, "cosmosportals.guide.two_sub_four"));
 			
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 140, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.two_body_three"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 140, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.two_body_three"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_two", " ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_two", " ]"), false);
 		}
 		
 		else if (this.currPage == 2) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.CYAN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.three_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.CYAN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.three_heading"), false);
 			
-			CosmosUISystem.setTextureWithColour(graphics.pose(), BLOCK_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 75, 40, 0, 0, 60, 60);
+			CosmosUISystem.Setup.setTextureWithColour(graphics.pose(), BLOCK_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 75, 40, 0, 0, 60, 60, FLAT_TEXTURES);
 			
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 70, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.three_body_one"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 70, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.three_body_one"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 1 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 1 ]"), false);
 		} 
 		
 		else if (this.currPage == 3) {
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, -4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.three_body_one_"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, -4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.three_body_one_"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 2 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 2 ]"), false);
 		} 
 		
 		else if (this.currPage == 4) {
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 3 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 3 ]"), false);
 		} 
 		
 		else if (this.currPage == 5) {
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 4 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_three", " 4 ]"), false);
 		} 
 		
 		//Modules
 		else if (this.currPage == 6) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.LIGHT_BLUE.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.four_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.LIGHT_BLUE.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.four_heading"), false);
 
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.four_body"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 4, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.four_body"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_four", " 1 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_four", " 1 ]"), false);
 		} 
 		
 		else if (this.currPage == 7) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.LIGHT_BLUE.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.four_heading_one"), false);
-			CosmosUISystem.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.LIGHT_BLUE.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.four_heading_one"), false);
+			CosmosUISystem.Setup.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
 			
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, (202) / 2 - 16, 40, 192, 224, 32, 32);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, (202) / 2 - 16, 40, 192, 224, 32, 32, FLAT_TEXTURES);
 			
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 50, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.four_body"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 50, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.four_body"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_four", " 1 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_four", " 1 ]"), false);
 		} 
 
 		else if (this.currPage == 8) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading"), false);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 0 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 0 ]"), false);
 		}
 		
 		else if (this.currPage == 9) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_one"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_one"), false);
 			
-			CosmosUISystem.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 30,  40, 0,   128, 20, 20);
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 55,  40, 20,  128, 20, 20);
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 80,  40, 40,  128, 20, 20);
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 105, 40, 60,  128, 20, 20);
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 130, 40, 80,  128, 20, 20);
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 155, 40, 100, 128, 20, 20);
+			CosmosUISystem.Setup.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 30,  40, 0,   128, 20, 20, FLAT_TEXTURES);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 55,  40, 20,  128, 20, 20, FLAT_TEXTURES);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 80,  40, 40,  128, 20, 20, FLAT_TEXTURES);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 105, 40, 60,  128, 20, 20, FLAT_TEXTURES);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 130, 40, 80,  128, 20, 20, FLAT_TEXTURES);
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 155, 40, 100, 128, 20, 20, FLAT_TEXTURES);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 1 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 1 ]"), false);
 		} 
 
 		else if (this.currPage == 10) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_two"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_two"), false);
 
 			//CosmosUISystem.setTexture(graphics, FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 2 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 2 ]"), false);
 		} 
 		
 		else if (this.currPage == 11) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_three"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_three"), false);
 
 			//CosmosUISystem.setTexture(graphics, FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 3 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 3 ]"), false);
 		} 
 
 		else if (this.currPage == 12) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_four"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -8, ComponentColour.GREEN.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.five_heading_four"), false);
 			
 			//CosmosUISystem.setTexture(graphics, FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 4 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_five", " 4 ]"), false);
 		} 
 		
 		else if (this.currPage == 13) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, -10, ComponentColour.DARK_GREEN.dec(),ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.six_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -10, ComponentColour.DARK_GREEN.dec(),ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.six_heading"), false);
 			
-			CosmosUISystem.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, (202) / 2 - 16, 40, 192, 96, 32, 32);
+			CosmosUISystem.Setup.setTextureWithColour(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, (202) / 2 - 16, 40, 192, 96, 32, 32, FLAT_TEXTURES);
 			
-			FONT.drawWrappedStringBR(graphics, font, screen_coords, 104, 45, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.six_body"));
+			CosmosUISystem.FontRenderer.drawWrappedStringBR(graphics, font, screen_coords, 104, 45, 0, ComponentColour.BLACK.dec(), ComponentHelper.locString("cosmosportals.guide.six_body"));
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_six", " Intro ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_six", " Intro ]"), false);
 		}
 		
 		else if (this.currPage >= 14 && this.currPage <= 15) {
-			CosmosUISystem.setTextureWithColourAlpha(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
-			CosmosUISystem.renderStaticElement(graphics, FLAT_TEXTURES, screen_coords, 202 / 2 - 30, 225 / 2 - 30, 128, 0, 64, 64);
+			CosmosUISystem.Setup.setTextureWithColourAlpha(graphics.pose(), FLAT_TEXTURES, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 202 / 2 - 30, 225 / 2 - 30, 128, 0, 64, 64, FLAT_TEXTURES);
 
-			CosmosUISystem.setTextureWithColour(graphics.pose(), this.getTexture(), new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
-			CosmosUISystem.renderStaticElement(graphics, this.getTexture(), screen_coords, 30, 35, 202, 0, 54, 74);
-			CosmosUISystem.renderStaticElement(graphics, this.getTexture(), screen_coords, 30, 125, 202, 0, 54, 74);
-			CosmosUISystem.renderStaticElement(graphics, this.getTexture(), screen_coords, 123, 35, 202, 0, 54, 74);
-			CosmosUISystem.renderStaticElement(graphics, this.getTexture(), screen_coords, 123, 125, 202, 0, 54, 74);
+			CosmosUISystem.Setup.setTextureWithColour(graphics.pose(), this.getTexture(), new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 30, 35, 202, 0, 54, 74, this.getTexture());
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 30, 125, 202, 0, 54, 74, this.getTexture());
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 123, 35, 202, 0, 54, 74, this.getTexture());
+			CosmosUISystem.Render.renderStaticElement(graphics, screen_coords, 123, 125, 202, 0, 54, 74, this.getTexture());
 
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_six", " " + (this.currPage - 13) + " ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_six", " " + (this.currPage - 13) + " ]"), false);
 			
 			if (this.currPage == 14) {
-				FONT.drawCenteredString(graphics, font, screen_coords, 104, -10, ComponentColour.DARK_GREEN.dec(),ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.six_heading_one"), false);
+				CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, -10, ComponentColour.DARK_GREEN.dec(),ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.six_heading_one"), false);
 				
 				graphics.drawString(this.font, Value.BOLD + "8", screen_coords[0] + 67, screen_coords[1] + 102, ComponentColour.BLACK.dec());
 				graphics.drawString(this.font, Value.BOLD + "2", screen_coords[0] + 160, screen_coords[1] + 102, ComponentColour.BLACK.dec());
@@ -301,29 +299,29 @@ public class ScreenItemGuide extends Screen {
 		}
 		
 		else if (this.currPage == 16) {
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 20, ComponentColour.RED.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.seven_heading"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 20, ComponentColour.RED.dec(), ComponentHelper.locString(Value.UNDERLINE, "cosmosportals.guide.seven_heading"), false);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 40, ComponentColour.POCKET_PURPLE_LIGHT.dec(), "TheCosmicNebula", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 50, ComponentColour.POCKET_PURPLE_LIGHT.dec(), "(Lead Programmer)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 40, ComponentColour.POCKET_PURPLE_LIGHT.dec(), "TheCosmicNebula", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 50, ComponentColour.POCKET_PURPLE_LIGHT.dec(), "(Lead Programmer)", false);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 70, ComponentColour.BLUE.dec(), "XCompWiz + Team", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 80, ComponentColour.BLUE.dec(), "(Original Mod, Concept)", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 90, ComponentColour.BLUE.dec(), "(Mystcraft Portals)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 70, ComponentColour.BLUE.dec(), "XCompWiz + Team", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 80, ComponentColour.BLUE.dec(), "(Original Mod, Concept)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 90, ComponentColour.BLUE.dec(), "(Mystcraft Portals)", false);
 			
 			/*
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 40, ComponentColour.DARK_GREEN.dec(), "Apolybrium", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 50, ComponentColour.DARK_GREEN.dec(), "(Texture Artist, Creative Input)", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 60, ComponentColour.DARK_GREEN.dec(), "(Sound Design)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 40, ComponentColour.DARK_GREEN.dec(), "Apolybrium", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 50, ComponentColour.DARK_GREEN.dec(), "(Texture Artist, Creative Input)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 60, ComponentColour.DARK_GREEN.dec(), "(Sound Design)", false);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 80, ComponentColour.BLUE.dec(), "Scarlet Spark", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 90, ComponentColour.BLUE.dec(), "(Lead Beta Tester)", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 100, ComponentColour.BLUE.dec(), "(Creative Lead, Ideas)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 80, ComponentColour.BLUE.dec(), "Scarlet Spark", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 90, ComponentColour.BLUE.dec(), "(Lead Beta Tester)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 100, ComponentColour.BLUE.dec(), "(Creative Lead, Ideas)", false);
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 120, ComponentColour.PURPLE.dec(), "Rechalow", false);
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 130, ComponentColour.PURPLE.dec(), "(Chinese Translation)", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 120, ComponentColour.PURPLE.dec(), "Rechalow", false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 130, ComponentColour.PURPLE.dec(), "(Chinese Translation)", false);
 			*/
 			
-			FONT.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_seven", " 1 ]"), false);
+			CosmosUISystem.FontRenderer.drawCenteredString(graphics, font, screen_coords, 104, 174, ComponentColour.GRAY.dec(), ComponentHelper.locString("[ ", "cosmosportals.guide.foot_seven", " 1 ]"), false);
 		}
 		
 		//CosmosUISystem.setTexture(graphics, TEXTURE, new float[] { 1.0F, 1.0F, 1.0F, 1.0F });
@@ -331,7 +329,7 @@ public class ScreenItemGuide extends Screen {
 	}
 	
 	public void renderComponentHoverEffect(GuiGraphics graphics, Style style, int mouseX, int mouseY) {
-		int[] screen_coords = CosmosUISystem.getScreenCoords(this, 202, 225);
+		int[] screen_coords = CosmosUISystem.Init.getScreenCoords(this, 202, 225);
 		
 		if (this.buttonExit.isMouseOver(mouseX, mouseY)) {
 			graphics.renderTooltip(this.font, ComponentHelper.style(ComponentColour.RED, "cosmosportals.guide.button_one"), mouseX, mouseY);
@@ -399,7 +397,7 @@ public class ScreenItemGuide extends Screen {
 	protected void drawRenderableWidgets() {
 		this.clearWidgets();
 		
-		this.uiModeButton = this.addRenderableWidget(new CosmosButtonUIMode(this.getUIMode(), this.width / 2 + 71, this.height / 2 - 90, true, true, ComponentHelper.empty(), (button) -> { this.changeUIMode(); } ));
+		this.uiModeButton = this.addRenderableWidget(new CosmosButtonUIMode(this.getUIMode(), this.width / 2 + 71, this.height / 2 - 90, false, true, true, ComponentHelper.empty(), (button) -> { this.changeUIMode(); } ));
 		
 		this.buttonNextPage = this.addRenderableWidget(new GuideChangeButton(this.width / 2 + 58, this.height / 2 + 92, true, (p_214159_1_) -> { this.nextPage(); }, this.pageTurnSounds, this.getTexture()));
 		this.buttonPreviousPage = this.addRenderableWidget(new GuideChangeButton(this.width / 2 - 79, this.height / 2 + 92, false, (p_214158_1_) -> { this.previousPage(); }, this.pageTurnSounds, this.getTexture()));
@@ -584,95 +582,95 @@ public class ScreenItemGuide extends Screen {
 		if (grid_ref == 0) {
 			//Top Left
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, LX[0], TY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, LX[1], TY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, LX[2], TY[0], mouseX, mouseY, true); }// 2
-			if (ref[3] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, LX[0], TY[1], mouseX, mouseY, true); }// 3
-			if (ref[4] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, LX[1], TY[1], mouseX, mouseY, true); }// 4
-			if (ref[5] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, LX[2], TY[1], mouseX, mouseY, true); }// 5
-			if (ref[6] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, LX[0], TY[2], mouseX, mouseY, true); }// 6
-			if (ref[7] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, LX[1], TY[2], mouseX, mouseY, true); }// 7
-			if (ref[8] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, LX[2], TY[2], mouseX, mouseY, true); }// 8
-			if (ref[9] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, LX[1], TY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, LX[0], TY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, LX[1], TY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, LX[2], TY[0], mouseX, mouseY, true); }// 2
+			if (ref[3] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, LX[0], TY[1], mouseX, mouseY, true); }// 3
+			if (ref[4] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, LX[1], TY[1], mouseX, mouseY, true); }// 4
+			if (ref[5] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, LX[2], TY[1], mouseX, mouseY, true); }// 5
+			if (ref[6] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, LX[0], TY[2], mouseX, mouseY, true); }// 6
+			if (ref[7] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, LX[1], TY[2], mouseX, mouseY, true); }// 7
+			if (ref[8] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, LX[2], TY[2], mouseX, mouseY, true); }// 8
+			if (ref[9] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, LX[1], TY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 2) {
 			
 			//Bottom Left
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, LX[0], BY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, LX[1], BY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, LX[2], BY[0], mouseX, mouseY, true); }// 2
-			if (ref[3] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, LX[0], BY[1], mouseX, mouseY, true); }// 3
-			if (ref[4] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, LX[1], BY[1], mouseX, mouseY, true); }// 4
-			if (ref[5] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, LX[2], BY[1], mouseX, mouseY, true); }// 5
-			if (ref[6] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, LX[0], BY[2], mouseX, mouseY, true); }// 6
-			if (ref[7] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, LX[1], BY[2], mouseX, mouseY, true); }// 7
-			if (ref[8] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, LX[2], BY[2], mouseX, mouseY, true); }// 8
-			if (ref[9] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, LX[1], BY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, LX[0], BY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, LX[1], BY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, LX[2], BY[0], mouseX, mouseY, true); }// 2
+			if (ref[3] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, LX[0], BY[1], mouseX, mouseY, true); }// 3
+			if (ref[4] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, LX[1], BY[1], mouseX, mouseY, true); }// 4
+			if (ref[5] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, LX[2], BY[1], mouseX, mouseY, true); }// 5
+			if (ref[6] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, LX[0], BY[2], mouseX, mouseY, true); }// 6
+			if (ref[7] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, LX[1], BY[2], mouseX, mouseY, true); }// 7
+			if (ref[8] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, LX[2], BY[2], mouseX, mouseY, true); }// 8
+			if (ref[9] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, LX[1], BY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 1) {
 			
 			//Top Right
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, RX[0], TY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, RX[1], TY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, RX[2], TY[0], mouseX, mouseY, true); }// 2
-			if (ref[3] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, RX[0], TY[1], mouseX, mouseY, true); }// 3
-			if (ref[4] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, RX[1], TY[1], mouseX, mouseY, true); }// 4
-			if (ref[5] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, RX[2], TY[1], mouseX, mouseY, true); }// 5
-			if (ref[6] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, RX[0], TY[2], mouseX, mouseY, true); }// 6
-			if (ref[7] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, RX[1], TY[2], mouseX, mouseY, true); }// 7
-			if (ref[8] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, RX[2], TY[2], mouseX, mouseY, true); }// 8
-			if (ref[9] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, RX[1], TY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, RX[0], TY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, RX[1], TY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, RX[2], TY[0], mouseX, mouseY, true); }// 2
+			if (ref[3] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, RX[0], TY[1], mouseX, mouseY, true); }// 3
+			if (ref[4] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, RX[1], TY[1], mouseX, mouseY, true); }// 4
+			if (ref[5] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, RX[2], TY[1], mouseX, mouseY, true); }// 5
+			if (ref[6] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, RX[0], TY[2], mouseX, mouseY, true); }// 6
+			if (ref[7] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, RX[1], TY[2], mouseX, mouseY, true); }// 7
+			if (ref[8] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, RX[2], TY[2], mouseX, mouseY, true); }// 8
+			if (ref[9] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, RX[1], TY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 3) {
 			
 			//Bottom Right
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, RX[0], BY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, RX[1], BY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, RX[2], BY[0], mouseX, mouseY, true); }// 2
-			if (ref[3] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, RX[0], BY[1], mouseX, mouseY, true); }// 3
-			if (ref[4] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, RX[1], BY[1], mouseX, mouseY, true); }// 4
-			if (ref[5] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, RX[2], BY[1], mouseX, mouseY, true); }// 5
-			if (ref[6] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, RX[0], BY[2], mouseX, mouseY, true); }// 6
-			if (ref[7] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, RX[1], BY[2], mouseX, mouseY, true); }// 7
-			if (ref[8] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, RX[2], BY[2], mouseX, mouseY, true); }// 8
-			if (ref[9] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, RX[1], BY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, RX[0], BY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, RX[1], BY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, RX[2], BY[0], mouseX, mouseY, true); }// 2
+			if (ref[3] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[3]], screen_coords, RX[0], BY[1], mouseX, mouseY, true); }// 3
+			if (ref[4] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[4]], screen_coords, RX[1], BY[1], mouseX, mouseY, true); }// 4
+			if (ref[5] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[5]], screen_coords, RX[2], BY[1], mouseX, mouseY, true); }// 5
+			if (ref[6] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[6]], screen_coords, RX[0], BY[2], mouseX, mouseY, true); }// 6
+			if (ref[7] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[7]], screen_coords, RX[1], BY[2], mouseX, mouseY, true); }// 7
+			if (ref[8] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[8]], screen_coords, RX[2], BY[2], mouseX, mouseY, true); }// 8
+			if (ref[9] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[9]], screen_coords, RX[1], BY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 10) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[1], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[1], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 11) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[2], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[2], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[2], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[2], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 12) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[4], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[4], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[5], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[4], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[4], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[5], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 13) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[6], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[6], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[7], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[0], STY[6], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[1], STY[6], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[2], STY[7], mouseX, mouseY, true); }// Out
 		}else if (grid_ref == 14) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[0], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[0], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[1], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[0], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[0], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[1], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 15) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[2], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[2], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[3], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[2], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[2], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[3], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 16) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[4], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[4], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[5], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[4], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[4], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[5], mouseX, mouseY, true); }// Out
 		} else if (grid_ref == 17) {
 			
-			if (ref[0] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[6], mouseX, mouseY, true); }// 0
-			if (ref[1] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[6], mouseX, mouseY, true); }// 1
-			if (ref[2] != -1) { CosmosUISystem.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[7], mouseX, mouseY, true); }// Out
+			if (ref[0] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[0]], screen_coords, SLX[3], STY[6], mouseX, mouseY, true); }// 0
+			if (ref[1] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[1]], screen_coords, SLX[4], STY[6], mouseX, mouseY, true); }// 1
+			if (ref[2] != -1) { CosmosUISystem.Render.renderItemStack(this, font, graphics, items[ref[2]], screen_coords, SLX[5], STY[7], mouseX, mouseY, true); }// Out
 		}
 	}
 

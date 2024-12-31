@@ -6,7 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.tcn.cosmoslibrary.client.renderer.lib.CosmosRendererHelper;
+import com.tcn.cosmoslibrary.client.renderer.CosmosRendererHelper;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 import com.tcn.cosmoslibrary.common.lib.MathHelper;
@@ -68,7 +68,6 @@ public class RendererPortalDockController4 implements BlockEntityRenderer<BlockE
 		double distanceToPlayer = pos.distManhattan(entityPos);
 		
 		BlockEntity testEntity = level.getBlockEntity(entityIn.getDockPos());
-		
 		
 		BlockState north = level.getBlockState(entityIn.getBlockPos().north(1));
 		BlockState east = level.getBlockState(entityIn.getBlockPos().east(1));

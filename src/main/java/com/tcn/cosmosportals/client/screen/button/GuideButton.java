@@ -2,7 +2,7 @@ package com.tcn.cosmosportals.client.screen.button;
 
 import java.util.function.Supplier;
 
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 
@@ -76,7 +76,7 @@ public class GuideButton extends Button {
 			
 			float[] rgb = ComponentColour.rgbFloatArray(this.colour);
 			
-			CosmosUISystem.setTextureWithColourAlpha(graphics.pose(), TEXTURE, rgb[0], rgb[1], rgb[2], this.alpha);
+			CosmosUISystem.Setup.setTextureWithColourAlpha(graphics.pose(), TEXTURE, rgb[0], rgb[1], rgb[2], this.alpha);
 			
 			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 	

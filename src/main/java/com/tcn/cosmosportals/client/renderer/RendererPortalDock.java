@@ -1,7 +1,7 @@
 package com.tcn.cosmosportals.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.tcn.cosmoslibrary.client.renderer.lib.CosmosRendererHelper;
+import com.tcn.cosmoslibrary.client.renderer.CosmosRendererHelper;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 import com.tcn.cosmosportals.core.block.BlockPortal;
 import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDock;

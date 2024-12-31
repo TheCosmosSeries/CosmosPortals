@@ -3,7 +3,7 @@ package com.tcn.cosmosportals.client.screen;
 import java.util.Arrays;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenUIModeBE;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType.TYPE;
@@ -22,7 +22,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> {
@@ -68,30 +67,28 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
 		super.renderBg(graphics, partialTicks, mouseX, mouseY);
 		
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDock blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDock blockEntity) {
 			int portalColour = blockEntity.getDisplayColour();
 			float frame[] = ComponentColour.rgbFloatArray(ComponentColour.GRAY);
 			float[] colour = new float[] {((portalColour >> 16) & 255) / 255.0F, ((portalColour >> 8) & 255) / 255.0F, (portalColour & 255) / 255.0F, 1F};
 			
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { frame[0], frame[1], frame[2], 1.0F }, CosmosPortalsReference.DOCK_FRAME);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, CosmosPortalsReference.DOCK_BACKING);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { frame[0], frame[1], frame[2], 1.0F }, CosmosPortalsReference.DOCK_FRAME);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, CosmosPortalsReference.DOCK_BACKING);
 			
 			if (blockEntity.isPortalFormed) {
 				RenderSystem.enableBlend();
-				CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_PORTAL);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_PORTAL);
 				RenderSystem.disableBlend();
 			}
 			
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_CONTAINER);
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity.getUIMode(), CosmosPortalsReference.DOCK_SLOTS);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_CONTAINER);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.DOCK_SLOTS);
 			
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				String human_name = blockEntity.getContainerDisplayName();
 				int width = this.font.width(human_name) + 2;
 				
-				CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - width / 2, 117, 0, 0, width, 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - width / 2, 117, 0, 0, width, 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL);
 			}
 
 			ComponentColour customColour = blockEntity.getCustomColour();
@@ -103,21 +100,19 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 					1 
 				};
 				
-				CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 167, 111, 0, 22, 4, 16, floatCol, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED4);
-				CosmosUISystem.setTextureColour(ComponentColour.WHITE);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 167, 111, 0, 22, 4, 16, floatCol, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED4);
+				CosmosUISystem.Setup.setTextureColour(ComponentColour.WHITE);
 			}
 			
 			
 			boolean hovered = this.colourButton.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexC[0], indexC[1], hovered ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED4);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexC[0], indexC[1], hovered ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED4);
 		}
 	}
 	
 	@Override
 	public void renderStandardHoverEffect(GuiGraphics graphics, Style style, int mouseX, int mouseY) {
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDock blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDock blockEntity) {
 			if (this.toggleLabelButton.isMouseOver(mouseX, mouseY)) {
 				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.label_info"), 
 					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.label_value", " ")
@@ -175,9 +170,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	@Override
 	protected void addButtons() {
 		super.addButtons();
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDock blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDock blockEntity) {
 			int i = 0;
 			int j = blockEntity.allowedEntities.getIndex();
 			
@@ -207,9 +200,8 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	@Override
 	public void clickButton(Button button, boolean isLeftClick) {
 		super.clickButton(button, isLeftClick);
-		BlockEntity entity = this.getBlockEntity();
 		
-		if (entity instanceof BlockEntityPortalDock blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDock blockEntity) {
 			if (isLeftClick) {
 				if (button.equals(this.toggleLabelButton)) {
 					PacketDistributor.sendToServer(new PacketPortalDock(this.menu.getBlockPos(), 0));
@@ -253,7 +245,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	protected void addUIHelpElements() {
 		super.addUIHelpElements();
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 73, 132, 34, 34, ComponentHelper.style(ComponentColour.WHITE, "bold", "cosmosportals.ui.help.container"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 73, 132, 34, 34, ComponentColour.WHITE, ComponentHelper.style(ComponentColour.WHITE, "bold", "cosmosportals.ui.help.container"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_two")
 		);
@@ -298,9 +290,7 @@ public class ScreenPortalDock extends CosmosScreenUIModeBE<ContainerPortalDock> 
 	}
 	
 	public void renderPortalLabel(GuiGraphics graphics) {
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDock blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDock blockEntity) {
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				int portalColour = blockEntity.getDisplayColour();
 				

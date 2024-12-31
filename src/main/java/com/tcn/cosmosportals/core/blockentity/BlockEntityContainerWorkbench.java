@@ -5,11 +5,11 @@ import com.tcn.cosmoslibrary.common.enums.EnumUILock;
 import com.tcn.cosmoslibrary.common.enums.EnumUIMode;
 import com.tcn.cosmoslibrary.common.interfaces.block.IBlockInteract;
 import com.tcn.cosmoslibrary.common.interfaces.block.IBlockNotifier;
-import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBlockEntityUIMode;
+import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBEUILockable;
+import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBEUIMode;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 import com.tcn.cosmosportals.client.container.ContainerContainerWorkbench;
-import com.tcn.cosmosportals.core.block.BlockContainerWorkbench;
 import com.tcn.cosmosportals.core.item.ItemPortalContainer;
 import com.tcn.cosmosportals.core.management.ModRegistrationManager;
 
@@ -41,8 +41,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-@SuppressWarnings({ "unused" })
-public class BlockEntityContainerWorkbench extends BlockEntity implements IBlockNotifier, IBlockInteract, Container, MenuProvider, IBlockEntityUIMode {
+public class BlockEntityContainerWorkbench extends BlockEntity implements IBlockNotifier, IBlockInteract, Container, MenuProvider, IBEUIMode, IBEUILockable {
 
 	NonNullList<ItemStack> inventoryItems = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 
@@ -58,16 +57,15 @@ public class BlockEntityContainerWorkbench extends BlockEntity implements IBlock
 	}
 
 	public void sendUpdates(boolean update) {
-		if (level != null) {
+		if (this.getLevel() != null) {
 			this.setChanged();
 			BlockState state = this.getBlockState();
-			BlockContainerWorkbench block = (BlockContainerWorkbench) state.getBlock();
-			
-			level.sendBlockUpdated(this.getBlockPos(), state, state, 3);
+
+			this.getLevel().sendBlockUpdated(this.getBlockPos(), state, state, 3);
 			
 			if (update) {
-				if (!level.isClientSide) {
-					level.setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
+				if (!this.getLevel().isClientSide()) {
+					this.getLevel().setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
 				}
 			}
 		}

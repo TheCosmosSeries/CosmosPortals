@@ -2,7 +2,7 @@ package com.tcn.cosmosportals.client.screen.button;
 
 import java.util.function.Supplier;
 
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,7 +40,7 @@ public class GuideChangeButton extends Button {
 	@Override
 	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
 		if (this.visible) {
-			CosmosUISystem.setTextureWithColourAlpha(graphics.pose(), TEXTURE, 1.0F, 1.0F, 1.0F, this.alpha);
+			CosmosUISystem.Setup.setTextureWithColourAlpha(graphics.pose(), TEXTURE, 1.0F, 1.0F, 1.0F, this.alpha);
 			
 			int i = 206;
 			int j = 230;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.tcn.cosmoslibrary.CosmosReference;
-import com.tcn.cosmoslibrary.client.ui.lib.CosmosUISystem;
+import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenUIModeBE;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType.TYPE;
@@ -25,7 +25,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPortalDockUpgraded8> {
@@ -77,9 +76,7 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 		
 		this.renderPortalLabel(graphics);
 
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
 			graphics.drawString(font, ComponentHelper.style(ComponentColour.GREEN, "bold", "" + (blockEntity.getCurrentSlotIndex() + 1)), this.getScreenCoords()[0] + 151, this.getScreenCoords()[1] + 18, ComponentColour.WHITE.dec(), false);
 		}
 	}
@@ -88,38 +85,36 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 	protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
 		super.renderBg(graphics, partialTicks, mouseX, mouseY);
 		
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
 			int portalColour = blockEntity.getDisplayColour();
 			float frame[] = ComponentColour.rgbFloatArray(ComponentColour.GRAY);
 			float[] colour = new float[] {((portalColour >> 16) & 255) / 255.0F, ((portalColour >> 8) & 255) / 255.0F, (portalColour & 255) / 255.0F, 1F};
 			
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { frame[0], frame[1], frame[2], 1.0F }, CosmosPortalsReference.DOCK_FRAME_UPGRADED8);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, CosmosPortalsReference.DOCK_BACKING_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { frame[0], frame[1], frame[2], 1.0F }, CosmosPortalsReference.DOCK_FRAME_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, CosmosPortalsReference.DOCK_BACKING_UPGRADED8);
 			
 			if (blockEntity.isPortalFormed) {
 				RenderSystem.enableBlend();
-				CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_PORTAL_UPGRADED8);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_PORTAL_UPGRADED8);
 				RenderSystem.disableBlend();
 			}
 			
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_CONTAINER_UPGRADED8);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), 75, 134, 30, 0, 32, 32, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, colour, CosmosPortalsReference.DOCK_CONTAINER_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), 75, 134, 30, 0, 32, 32, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 			
-			CosmosUISystem.renderStaticElementWithUIMode(this, graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity.getUIMode(), CosmosPortalsReference.DOCK_SLOTS_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElementWithUIMode(graphics, this.getScreenCoords(), 0, 0, 0, 0, this.imageWidth, this.imageHeight, new float[] { 1.0F, 1.0F, 1.0F, 1.0F }, blockEntity, CosmosPortalsReference.DOCK_SLOTS_UPGRADED8);
 			
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				String human_name = blockEntity.getContainerDisplayName();
 				int width = this.font.width(human_name) + 4;
 				
-				CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - width / 2, 117, 0, 0, width, 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL_UPGRADED8);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - width / 2, 117, 0, 0, width, 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL_UPGRADED8);
 			}
 
 			int currentSlot = blockEntity.getCurrentSlotIndex();
 			int[] currentSlotPos = this.slotIndexes[currentSlot];
 			
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), currentSlotPos[0] + 2, currentSlotPos[1] + 2, 18, 72, 18, 18, CosmosReference.RESOURCE.BASE.GUI_SLOT_LOC);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), currentSlotPos[0] + 2, currentSlotPos[1] + 2, 18, 72, 18, 18, CosmosReference.RESOURCE.BASE.GUI_SLOT_LOC);
 			
 			ComponentColour[] customColours = blockEntity.customColours;
 			
@@ -134,45 +129,43 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 						1 
 					};
 					
-					CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCol[i > 3 ? 1 : 0], indexCol[i + 2], 0, 22, 4, 16, floatCol, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
-					CosmosUISystem.setTextureColour(ComponentColour.WHITE);
+					CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCol[i > 3 ? 1 : 0], indexCol[i + 2], 0, 22, 4, 16, floatCol, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 				}
 			}
 			
 			boolean hovered0 = this.colourButton0.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[0][0], indexCs[0][1], hovered0 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[0][0], indexCs[0][1], hovered0 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered1 = this.colourButton1.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[1][0], indexCs[1][1], hovered1 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[1][0], indexCs[1][1], hovered1 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered2 = this.colourButton2.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[2][0], indexCs[2][1], hovered2 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[2][0], indexCs[2][1], hovered2 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered3 = this.colourButton3.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[3][0], indexCs[3][1], hovered3 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[3][0], indexCs[3][1], hovered3 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 			
 			boolean hovered4 = this.colourButton0.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[4][0], indexCs[4][1], hovered4 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[4][0], indexCs[4][1], hovered4 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered5 = this.colourButton1.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[5][0], indexCs[5][1], hovered5 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[5][0], indexCs[5][1], hovered5 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered6 = this.colourButton2.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[6][0], indexCs[6][1], hovered6 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[6][0], indexCs[6][1], hovered6 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 
 			boolean hovered7 = this.colourButton3.isMouseOver(mouseX, mouseY);
-			CosmosUISystem.renderStaticElement(this, graphics, this.getScreenCoords(), indexCs[7][0], indexCs[7][1], hovered7 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
+			CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), indexCs[7][0], indexCs[7][1], hovered7 ? 6 : 0, 38, 6, 18, CosmosPortalsReference.DOCK_OVERLAY_ONE_UPGRADED8);
 		}
 	}
 	
 	@Override
 	public void renderStandardHoverEffect(GuiGraphics graphics, Style style, int mouseX, int mouseY) {
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
 			if (this.toggleLabelButton.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.label_info"), 
-					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.label_value", " ")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.label_info"), 
+					ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.label_value", " ")
 					.append(blockEntity.renderLabel ? ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.gui.dock.label_shown") : ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.gui.dock.label_hidden"))
 				};
 				
@@ -180,8 +173,9 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			}
 			
 			if (this.toggleSoundButton.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.sounds_info"), 
-					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.sounds_value", " ")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.sounds_info"), 
+					ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.sounds_value", " ")
 					.append(blockEntity.playSound ? ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.gui.dock.sounds_played") : ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.gui.dock.sounds_muffled"))
 				};
 				
@@ -189,8 +183,9 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			}
 			
 			if (this.toggleEntityButton.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.entity_info"), 
-					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.entity_value", " ")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.entity_info"), 
+					ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.entity_value", " ")
 					.append(blockEntity.allowedEntities.getColouredComp())
 				};
 				
@@ -198,8 +193,9 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			}
 
 			if (this.toggleParticlesButton.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.particle_info"), 
-					(MutableComponent) ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.particle_value", " ")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmosportals.gui.dock.particle_info"), 
+					ComponentHelper.style2(ComponentColour.GRAY, "cosmosportals.gui.dock.particle_value", " ")
 					.append(blockEntity.showParticles ? ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.gui.dock.particle_shown") : ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.gui.dock.particle_hidden"))
 				};
 				
@@ -207,80 +203,90 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			}
 			
 			if (this.colourButton0.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[0].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[0].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton1.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[1].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[1].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton2.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[2].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[2].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton3.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[3].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[3].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 			
 			if (this.colourButton4.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[4].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[4].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton5.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[5].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[5].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton6.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[6].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[6].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.colourButton7.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
-					(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[7].getColouredName())
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.WHITE, "cosmoslibrary.gui.colour.info"), 
+					ComponentHelper.style(ComponentColour.GRAY, "cosmoslibrary.gui.colour.value").append(blockEntity.getCustomColoursComp(false)[7].getColouredName())
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 			
 			if (this.cycleSlotButtonDown.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.gui.dock.cycle_down"), 
-					//(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmosportals.gui.dock.cycle_down_value")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.gui.dock.cycle_down"), 
+					//ComponentHelper.style(ComponentColour.GRAY, "cosmosportals.gui.dock.cycle_down_value")
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
 			}
 
 			if (this.cycleSlotButtonUp.isMouseOver(mouseX, mouseY)) {
-				MutableComponent[] comp = new MutableComponent[] { ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.gui.dock.cycle_up"), 
-					//(MutableComponent) ComponentHelper.style(ComponentColour.GRAY, "cosmosportals.gui.dock.cycle_up_value")
+				MutableComponent[] comp = new MutableComponent[] {
+					ComponentHelper.style(ComponentColour.GREEN, "cosmosportals.gui.dock.cycle_up"), 
+					//ComponentHelper.style(ComponentColour.GRAY, "cosmosportals.gui.dock.cycle_up_value")
 				};
 				
 				graphics.renderComponentTooltip(this.font, Arrays.asList(comp), mouseX, mouseY);
@@ -324,9 +330,8 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 	@Override
 	protected void addButtons() {
 		super.addButtons();
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
+
+		if (this.getBlockEntity() instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
 			int i = 0;
 			int j = blockEntity.allowedEntities.getIndex();
 			
@@ -490,16 +495,33 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 	protected void addUIHelpElements() {
 		super.addUIHelpElements();
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 73, 132, 34, 34, ComponentHelper.style(ComponentColour.WHITE, "bold", "cosmosportals.ui.help.container"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 73, 132, 34, 34, ComponentColour.WHITE, ComponentHelper.style(ComponentColour.WHITE, "bold", "cosmosportals.ui.help.container"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_two")
 		);
 		
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 144, 43, 20, 86, ComponentColour.RED, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.ui.help.container_items"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 16, 56, 20, 80, ComponentColour.RED, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.ui.help.container_items"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_items_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_items_two")
 		);
-		
+
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 7, 56, 8, 80, ComponentColour.YELLOW, ComponentHelper.style(ComponentColour.YELLOW, "bold", "cosmosportals.ui.help.colours"), 
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_one"),
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_two"),
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_three")
+		);
+
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 144, 56, 20, 80, ComponentColour.RED, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.ui.help.container_items"), 
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_items_one"), 
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.container_items_two")
+		);
+
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 165, 56, 8, 80, ComponentColour.YELLOW, ComponentHelper.style(ComponentColour.YELLOW, "bold", "cosmosportals.ui.help.colours"), 
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_one"),
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_two"),
+			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_three")
+		);
+
 		this.addRenderableUIHelpElement(this.getScreenCoords(), 15, 138, 22, 22, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.button_label"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.button_label_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.button_label_two")
@@ -527,27 +549,19 @@ public class ScreenPortalDockUpgraded8 extends CosmosScreenUIModeBE<ContainerPor
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.label_three")
 		);
 		
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 165, 43, 8, 86, ComponentColour.YELLOW, ComponentHelper.style(ComponentColour.YELLOW, "bold", "cosmosportals.ui.help.colours"), 
-			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_one"),
-			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_two"),
-			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.colours_three")
-		);
-
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 15, 78, 22, 22, ComponentColour.LIGHT_BLUE, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "bold", "cosmosportals.ui.help.cycle_up"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 16, 34, 20, 20, ComponentColour.LIGHT_BLUE, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "bold", "cosmosportals.ui.help.cycle_up"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.cycle_up_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.cycle_up_two")
 		);
 		
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 15, 108, 22, 22, ComponentColour.LIGHT_BLUE, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "bold", "cosmosportals.ui.help.cycle_down"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 144, 34, 20, 20, ComponentColour.LIGHT_BLUE, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "bold", "cosmosportals.ui.help.cycle_down"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.cycle_down_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.cycle_down_two")
 		);
 	}
 	
 	public void renderPortalLabel(GuiGraphics graphics) {
-		BlockEntity entity = this.getBlockEntity();
-		
-		if (entity instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
+		if (this.getBlockEntity() instanceof BlockEntityPortalDockUpgraded8 blockEntity) {
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				int portalColour = blockEntity.getDisplayColour();
 				

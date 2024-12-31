@@ -11,15 +11,15 @@ import com.tcn.cosmoslibrary.common.enums.EnumUILock;
 import com.tcn.cosmoslibrary.common.enums.EnumUIMode;
 import com.tcn.cosmoslibrary.common.interfaces.block.IBlockInteract;
 import com.tcn.cosmoslibrary.common.interfaces.block.IBlockNotifier;
-import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBlockEntityUIMode;
+import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBEUILockable;
+import com.tcn.cosmoslibrary.common.interfaces.blockentity.IBEUIMode;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.registry.gson.object.ObjectDestinationInfo;
 import com.tcn.cosmoslibrary.registry.gson.object.ObjectPlayerInformation;
-import com.tcn.cosmosportals.core.block.AbstractBlockPortalDock;
 import com.tcn.cosmosportals.core.block.BlockPortal;
 import com.tcn.cosmosportals.core.item.ItemPortalContainer;
-import com.tcn.cosmosportals.core.management.ModSoundManager;
 import com.tcn.cosmosportals.core.management.ModRegistrationManager;
+import com.tcn.cosmosportals.core.management.ModSoundManager;
 import com.tcn.cosmosportals.core.portal.CustomPortalShape;
 import com.tcn.cosmosportals.core.portal.EnumPortalSettings;
 
@@ -60,8 +60,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-@SuppressWarnings({ "unused", "deprecation" })
-public abstract class AbstractBlockEntityPortalDock extends BlockEntity implements IBlockNotifier, IBlockInteract, Container, MenuProvider, Nameable, IBlockEntityUIMode {
+@SuppressWarnings({ "deprecation" })
+public abstract class AbstractBlockEntityPortalDock extends BlockEntity implements IBlockNotifier, IBlockInteract, Container, MenuProvider, Nameable, IBEUIMode, IBEUILockable {
 
 	NonNullList<ItemStack> inventoryItems;
 
@@ -96,16 +96,15 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 	}
 
 	public void sendUpdates(boolean update) {
-		if (level != null) {
+		if (this.getLevel() != null) {
 			this.setChanged();
 			BlockState state = this.getBlockState();
-			AbstractBlockPortalDock block = (AbstractBlockPortalDock) state.getBlock();
 			
-			level.sendBlockUpdated(this.getBlockPos(), state, state, 3);
+			this.getLevel().sendBlockUpdated(this.getBlockPos(), state, state, 3);
 			
 			if (update) {
-				if (!level.isClientSide) {
-					level.setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
+				if (!this.getLevel().isClientSide()) {
+					this.getLevel().setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
 				}
 			}
 		}
@@ -266,8 +265,6 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 		
 		if(playerIn.isShiftKeyDown()) {
 			if (stackIn.getItem().equals(ModRegistrationManager.DIMENSION_CONTAINER_LINKED.get()) && this.getItem(slotEmpty).isEmpty() && !(stackIn.isEmpty())) {
-				ItemPortalContainer item = (ItemPortalContainer) stackIn.getItem();
-				
 				this.setItem(slotEmpty, stackIn.copy());
 				
 				if (!playerIn.isCreative()) {
