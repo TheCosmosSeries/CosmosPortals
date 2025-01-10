@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.tcn.cosmoslibrary.CosmosReference;
 import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
-import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenUIModeBE;
+import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenBlockEntityUI;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType.TYPE;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosColourButton;
@@ -27,7 +27,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class ScreenPortalDockUpgraded4 extends CosmosScreenUIModeBE<ContainerPortalDockUpgraded4> {
+public class ScreenPortalDockUpgraded4 extends CosmosScreenBlockEntityUI<ContainerPortalDockUpgraded4> {
 	
 	private CosmosButtonWithType toggleLabelButton;     private int[] indexL   = new int[] { 16,  139, 20 };
 	private CosmosButtonWithType toggleSoundButton;     private int[] indexS   = new int[] { 46,  139, 20 };

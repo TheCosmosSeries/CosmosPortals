@@ -1,6 +1,6 @@
 package com.tcn.cosmosportals;
 
-import com.tcn.cosmoslibrary.common.runtime.CosmosConsoleManager;
+import com.tcn.cosmoslibrary.runtime.common.CosmosConsoleManager;
 import com.tcn.cosmosportals.core.management.ModConfigManager;
 import com.tcn.cosmosportals.core.management.ModRegistrationManager;
 import com.tcn.cosmosportals.core.management.ModSoundManager;

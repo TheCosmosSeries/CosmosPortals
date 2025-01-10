@@ -3,7 +3,7 @@ package com.tcn.cosmosportals.client.screen;
 import java.util.Arrays;
 
 import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
-import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenUIModeBE;
+import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenBlockEntityUI;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType.TYPE;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosColourButton;
@@ -30,7 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class ScreenContainerWorkbench extends CosmosScreenUIModeBE<ContainerContainerWorkbench> {
+public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<ContainerContainerWorkbench> {
 	
 	private CosmosButtonWithType clearButton; private int[] indexCl = new int[] { 5, 17, 18 };
 	private CosmosButtonWithType applyButton; private int[] indexA = new int[] { 5, 45, 18 };

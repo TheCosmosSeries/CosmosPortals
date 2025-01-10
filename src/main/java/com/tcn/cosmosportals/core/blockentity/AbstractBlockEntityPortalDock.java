@@ -299,17 +299,17 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 				return ItemInteractionResult.SUCCESS;
 			}
 		} else {
-			if (!this.level.isClientSide && playerIn instanceof ServerPlayer serverPlayer) {
+			if (!this.getLevel().isClientSide() && playerIn instanceof ServerPlayer serverPlayer) {
 	            serverPlayer.openMenu(this, (buf) -> buf.writeBlockPos(posIn));
 	        }
-	        return ItemInteractionResult.sidedSuccess(this.level.isClientSide);
+	        return ItemInteractionResult.sidedSuccess(this.getLevel().isClientSide());
 		}
 		return ItemInteractionResult.FAIL;
 	}
 
 	@Override
 	public BlockState playerWillDestroy(Level levelIn, BlockPos posIn, BlockState stateIn, Player playerIn) {
-		if (!levelIn.isClientSide) {
+		if (!levelIn.isClientSide()) {
 			
 			for (int i = 0; i < this.getMaxSlotIndex() +1; i++) {
 				ItemEntity entity = new ItemEntity(levelIn, posIn.getX(), posIn.getY(), posIn.getZ(), this.getItem(i));
@@ -323,7 +323,7 @@ public abstract class AbstractBlockEntityPortalDock extends BlockEntity implemen
 
 	@Override
 	public void setPlacedBy(Level levelIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) { 
-		if (!levelIn.isClientSide) {
+		if (!levelIn.isClientSide()) {
 			if (placer instanceof Player) {
 				Player player = (Player) placer;
 				this.setOwner(player);

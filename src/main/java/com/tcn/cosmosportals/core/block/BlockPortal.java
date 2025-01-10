@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.tcn.cosmoslibrary.common.block.CosmosBlockUnbreakable;
-import com.tcn.cosmoslibrary.common.interfaces.IBlankCreativeTab;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityPortal;
 import com.tcn.cosmosportals.core.management.ModConfigManager;
 import com.tcn.cosmosportals.core.management.ModRegistrationManager;
@@ -42,7 +41,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @SuppressWarnings("unchecked")
-public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock, IBlankCreativeTab {
+public class BlockPortal extends CosmosBlockUnbreakable implements EntityBlock {
 	
 	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
 	protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);

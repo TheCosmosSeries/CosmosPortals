@@ -7,7 +7,7 @@ import com.tcn.cosmoslibrary.common.block.CosmosBlock;
 import com.tcn.cosmoslibrary.common.item.CosmosItem;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
-import com.tcn.cosmoslibrary.common.runtime.CosmosRuntimeHelper;
+import com.tcn.cosmoslibrary.runtime.common.CosmosRuntime;
 import com.tcn.cosmosportals.CosmosPortals;
 import com.tcn.cosmosportals.client.colour.BlockColour;
 import com.tcn.cosmosportals.client.colour.ItemColour;
@@ -188,7 +188,7 @@ public class ModRegistrationManager {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRegisterColourHandlersEventBlock(RegisterColorHandlersEvent.Block event) {
-		CosmosRuntimeHelper.registerBlockColours(event, new BlockColour(), 
+		CosmosRuntime.Client.registerBlockColours(event, new BlockColour(), 
 			PORTAL_FRAME.get(),
 			PORTAL_DOCK.get(),
 			PORTAL_DOCK_UPGRADED.get(),
@@ -202,7 +202,7 @@ public class ModRegistrationManager {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRegisterColourHandlersEventItem(RegisterColorHandlersEvent.Item event) {
-		CosmosRuntimeHelper.registerItemColours(event, new ItemColour(), 
+		CosmosRuntime.Client.registerItemColours(event, new ItemColour(), 
 			DIMENSION_CONTAINER_LINKED.get(),
 			PORTAL_FRAME.get(),
 			PORTAL_DOCK.get(),
@@ -235,10 +235,10 @@ public class ModRegistrationManager {
 		RenderType cutoutMipped = RenderType.cutoutMipped();
 		RenderType translucent = RenderType.translucent();
 		
-		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK.get());
-		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED.get());
-		CosmosRuntimeHelper.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED8.get());
-		CosmosRuntimeHelper.setRenderLayers(translucent,  BLOCK_PORTAL.get());
+		CosmosRuntime.Client.setRenderLayers(cutoutMipped, PORTAL_DOCK.get());
+		CosmosRuntime.Client.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED.get());
+		CosmosRuntime.Client.setRenderLayers(cutoutMipped, PORTAL_DOCK_UPGRADED8.get());
+		CosmosRuntime.Client.setRenderLayers(translucent,  BLOCK_PORTAL.get());
 	}
 
     public static <T extends Item> DeferredItem<T> addToTab(DeferredItem<T> itemLike) {

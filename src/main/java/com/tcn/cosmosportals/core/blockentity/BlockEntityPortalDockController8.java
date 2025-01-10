@@ -42,15 +42,15 @@ public class BlockEntityPortalDockController8 extends BlockEntity implements IBl
 	}
 
 	public void sendUpdates(boolean update) {
-		if (level != null) {
+		if (this.getLevel() != null) {
 			this.setChanged();
 			BlockState state = this.getBlockState();
 			
-			level.sendBlockUpdated(this.getBlockPos(), state, state, 3);
+			this.getLevel().sendBlockUpdated(this.getBlockPos(), state, state, 3);
 			
 			if (update) {
-				if (!level.isClientSide) {
-					level.setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
+				if (!this.getLevel().isClientSide()) {
+					this.getLevel().setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
 				}
 			}
 		}
@@ -174,7 +174,7 @@ public class BlockEntityPortalDockController8 extends BlockEntity implements IBl
 				if (entity != null) {
 					AbstractBlockEntityPortalDock dockEntity = (AbstractBlockEntityPortalDock) entity;
 					
-					if (!(levelIn.isClientSide)) {
+					if (!(levelIn.isClientSide())) {
 						dockEntity.setCurrentSlot(buttonID);
 						this.buttonPressed = true;
 						dockEntity.sendUpdates(true);
