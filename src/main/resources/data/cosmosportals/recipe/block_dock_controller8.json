@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		"   ",
+		"BRB",
+		"   "
+	],
+	"key": {
+		"B": {
+			"item": "cosmosportals:block_dock_controller"
+		},
+		"R": {
+			"item": "cosmosportals:block_cosmic"
+		}
+	},
+	"result": {
+		"count": 1,
+		"id": "cosmosportals:block_dock_controller8"
+	}
+}

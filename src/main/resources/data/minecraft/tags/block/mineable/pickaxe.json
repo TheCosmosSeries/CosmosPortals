@@ -1,4 +1,5 @@
 {
+	"replace": false,
 	"values": [
 		"cosmosportals:block_portal_frame",
 		"cosmosportals:block_portal_dock",
