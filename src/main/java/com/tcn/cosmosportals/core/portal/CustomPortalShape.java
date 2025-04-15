@@ -73,6 +73,10 @@ public class CustomPortalShape {
 			}
 		}
 	}
+	
+	public int getWidth() {
+		return this.width;
+	}
 
 	@Nullable
 	private BlockPos calculateBottomLeft(BlockPos posIn) {

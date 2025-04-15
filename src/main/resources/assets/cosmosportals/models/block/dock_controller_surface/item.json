@@ -1,0 +1,50 @@
+{
+    "parent": "block/block",
+    "display": {
+        "gui": {
+            "rotation": [ 15, 190, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.5, 0.5, 0.5 ]
+        }
+    },
+    "textures": {
+        "particle": "cosmosportals:block/dock/controller/base",
+        "base": "cosmosportals:block/dock/controller/base",
+        "ends": "cosmosportals:block/frame/normal",
+        "buttons": "cosmosportals:block/dock/controller/buttons",
+        "text": "cosmosportals:block/dock/controller/text",
+        "rear": "cosmosportals:block/dock/controller/rear"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 15 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "up": { "texture": "#rear", "tintindex": 0 },
+                "down": { "texture": "#rear", "tintindex": 0 },
+                "north": { "texture": "#base", "tintindex": 0 },
+                "south": { "texture": "#rear", "tintindex": 0 },
+                "west": { "texture": "#rear", "tintindex": 0 },
+                "east": { "texture": "#rear", "tintindex": 0 }
+            }
+        },
+        {   "from": [ 0, 0, 14.9 ],
+            "to": [ 16, 16, 14.9 ],
+            "faces": {
+                "north": { "texture": "#buttons",  "cullface": "north", "tintindex": 1 },
+                "south": { "texture": "#buttons",  "cullface": "south", "tintindex": 1 }
+            }
+        },
+        {   "from": [ 0, 0, 14.9 ],
+            "to": [ 16, 16, 14.9 ],
+            "faces": {
+                "north": { "texture": "#text",  "cullface": "north", "tintindex": 1 },
+                "south": { "texture": "#text",  "cullface": "south", "tintindex": 1 }
+            }
+        }
+    ]
+}

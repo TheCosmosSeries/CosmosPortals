@@ -13,6 +13,7 @@ import com.tcn.cosmosportals.CosmosPortalsReference;
 import com.tcn.cosmosportals.client.container.ContainerContainerWorkbench;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityContainerWorkbench;
 import com.tcn.cosmosportals.core.item.ItemPortalContainer;
+import com.tcn.cosmosportals.core.management.ModConfigManager;
 import com.tcn.cosmosportals.core.network.packet.PacketColour;
 import com.tcn.cosmosportals.core.network.packet.PacketWorkbenchName;
 
@@ -32,11 +33,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<ContainerContainerWorkbench> {
 	
-	private CosmosButtonWithType clearButton; private int[] indexCl = new int[] { 5, 17, 18 };
-	private CosmosButtonWithType applyButton; private int[] indexA = new int[] { 5, 45, 18 };
+	private CosmosButtonWithType clearButton; private int[] indexCl = new int[] { 5, 45, 18 };
+	private CosmosButtonWithType applyButton; private int[] indexA = new int[] { 29, 45, 18 };
 	private CosmosColourButton colourButton; private int[] indexC = new int[] { 149, 45, 18 };
 		
-	private EditBox textField; private int[] textFieldI = new int[] { 38, 22, 104, 16 };
+	private EditBox textField; private int[] textFieldI = new int[] { 7, 23, 144, 16 };
 	
 	public ScreenContainerWorkbench(ContainerContainerWorkbench containerIn, Inventory playerInventoryIn, Component titleIn) {
 		super(containerIn, playerInventoryIn, titleIn);
@@ -65,9 +66,7 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 
 	@Override
 	protected void containerTick() {
-		Slot slot = this.menu.getSlot(1);
-		
-		if (slot.hasItem()) {
+		if (this.getMenu().getSlot(1).hasItem()) {
 			this.textField.setEditable(true);
 		} else {
 			this.textField.setEditable(false);
@@ -78,12 +77,12 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		
-		Slot slot = this.menu.getSlot(1);
+		Slot slot = this.getMenu().getSlot(1);
 		
 		if (!slot.getItem().isEmpty()) {
 			ItemStack stack = slot.getItem();
 			
-			if (stack.getItem() instanceof ItemPortalContainer item) {
+			if (stack.getItem() instanceof ItemPortalContainer) {
 				if (stack.has(DataComponents.CUSTOM_DATA)) {
 					CompoundTag stack_tag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
 					
@@ -93,10 +92,8 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 						if (nbt_data.contains("display_data")) {
 							CompoundTag display_data = nbt_data.getCompound("display_data");
 							
-							String display_name = display_data.getString("name");
-							
 							if (this.textField.getValue().isBlank() && !this.textField.isFocused()) {
-								this.textField.setValue(display_name);
+								this.textField.setValue(display_data.getString("name"));
 								this.textField.setHighlightPos(0);
 								this.textField.setFocused(true);
 							}
@@ -125,32 +122,32 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 	protected void addUIHelpElements() {
 		super.addUIHelpElements();
 		
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 32, 44, 20, 20, ComponentHelper.style(ComponentColour.WHITE, "bold", "cosmosportals.ui.help.workbench.container"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 52, 44, 20, 20, ComponentColour.CYAN, ComponentHelper.style(ComponentColour.CYAN, "bold", "cosmosportals.ui.help.workbench.container"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_two"),
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_three")
 		);
 		
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 76, 44, 20, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.container_linked"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 86, 44, 20, 20, ComponentColour.YELLOW, ComponentHelper.style(ComponentColour.YELLOW, "bold", "cosmosportals.ui.help.workbench.container_linked"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_linked_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_linked_two")
 		);
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 120, 44, 20, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.container_copied"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 120, 44, 20, 20, ComponentColour.LIGHT_BLUE, ComponentHelper.style(ComponentColour.LIGHT_BLUE, "bold", "cosmosportals.ui.help.workbench.container_copied"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_copied_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.container_copied_two")
 		);
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 4, 44, 20, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.button_apply"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 28, 44, 20, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.button_apply"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.button_apply_one"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.button_apply_two")
 		);
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 4, 16, 20, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.button_clear"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 4, 44, 20, 20, ComponentColour.RED, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.ui.help.workbench.button_clear"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.button_clear_one")
 		);
 
-		this.addRenderableUIHelpElement(this.getScreenCoords(), 32, 16, 108, 20, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.text"), 
+		this.addRenderableUIHelpElement(this.getScreenCoords(), 4, 18, 150, 19, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.ui.help.workbench.text"), 
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.text_one"),
 			ComponentHelper.style(ComponentColour.LIGHT_GRAY, "cosmosportals.ui.help.workbench.text_two")
 		);
@@ -207,25 +204,22 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 		if (this.getBlockEntity() instanceof BlockEntityContainerWorkbench blockEntity) {
 			if (isLeftClick) {
 				if (button.equals(this.applyButton)) {
+					this.textField.setFocused(true);
 					PacketDistributor.sendToServer(new PacketWorkbenchName(this.menu.getBlockPos(), this.textField.getValue()));
 					blockEntity.setContainerDisplayName(this.textField.getValue());
 					blockEntity.sendUpdates(true);
+					this.textField.setFocused(true);
 				}
 	
 				if (button.equals(this.colourButton)) {
 					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColour().getNextVanillaColour(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, -1));
-					blockEntity.updateColour(colour);
-					this.menu.broadcastChanges();
 				}
 				
 				if (button.equals(this.clearButton)) {
 					this.textField.setValue("");
 				}
-			}
-			
-			//Do right click
-			else {
+			} else {
 				if (button.equals(this.colourButton)) {
 					ComponentColour colour = hasShiftDown() ? ComponentColour.EMPTY : blockEntity.getCustomColour().getNextVanillaColourReverse(true);
 					PacketDistributor.sendToServer(new PacketColour(this.menu.getBlockPos(), colour, -1));
@@ -238,7 +232,7 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 	public void initEditBox() {
 		super.initEditBox();
         this.textField = new EditBox(this.font, this.getScreenCoords()[0] + this.textFieldI[0], this.getScreenCoords()[1] + this.textFieldI[1], this.textFieldI[2], this.textFieldI[3], ComponentHelper.comp("Portal Name Entry"));
-		this.textField.setMaxLength(12);
+		this.textField.setMaxLength(ModConfigManager.getInstance().getPortalNameLength());
 		this.textField.setTextColor(CosmosUISystem.DEFAULT_COLOUR_FONT_LIST);
 		this.textField.setVisible(true);
 		this.textField.setBordered(false);
@@ -252,11 +246,13 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
 		if (this.textField.mouseClicked(mouseX, mouseY, mouseButton)) {
 			this.textField.setFocused(true);
-		} else {
+		} else if (!this.clearButton.isMouseOver(mouseX, mouseY)) {
 			this.textField.setFocused(false);
 		}
 		
-		return this.textField.mouseClicked(mouseX, mouseY, mouseButton) ? true : super.mouseClicked(mouseX, mouseY, mouseButton);
+		this.textField.mouseClicked(mouseX, mouseY, mouseButton);
+		
+		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	@Override
@@ -266,9 +262,13 @@ public class ScreenContainerWorkbench extends CosmosScreenBlockEntityUI<Containe
 
 	@Override
 	public boolean keyPressed(int keyCode, int mouseX, int mouseY) {
-		if (keyCode == 256) {
+		if ((keyCode == 335 || keyCode == 257) && this.textField.isFocused()) {
+			
+		} else if (keyCode == 256) {
 			if (this.textField.isFocused()) {
 				this.textField.setFocused(false);
+				this.textField.setCursorPosition(0);
+				return false;
 			} else {
 				this.minecraft.player.closeContainer();
 			}

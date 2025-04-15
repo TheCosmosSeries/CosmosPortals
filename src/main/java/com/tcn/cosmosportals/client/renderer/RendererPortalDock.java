@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,6 +30,7 @@ public class RendererPortalDock implements BlockEntityRenderer<AbstractBlockEnti
 		this.context = contextIn;
 	}	
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void render(AbstractBlockEntityPortalDock entityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		Minecraft minecraft = Minecraft.getInstance();
@@ -54,29 +56,89 @@ public class RendererPortalDock implements BlockEntityRenderer<AbstractBlockEnti
 					poseStack.translate(0.5F, 1.5F, 0.5F);
 					
 					if (axis.equals(Axis.Z)) {
-						//Facing East
+						//Facing EAST/WEST
 						poseStack.pushPose();
-						poseStack.translate(0.25F, 0.0F, 0.0F);
+						poseStack.translate(0.5F, 0.0F, 0.0F);
+						
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+							
+							if (dir != null) {
+								if (dir.equals(Direction.NORTH)) {
+									poseStack.translate(0.0F, 0.0F, 0.5F);
+								} else if (dir.equals(Direction.SOUTH)) {
+									poseStack.translate(0.0F, 0.0F, -0.5F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(90));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.above().east()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 						
 						poseStack.pushPose();
-						poseStack.translate(-0.25F, 0.0F, 0.0F);
+						poseStack.translate(-0.5F, 0.0F, 0.0F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+
+							if (dir != null) {
+								if (dir.equals(Direction.NORTH)) {
+									poseStack.translate(0.0F, 0.0F, 0.5F);
+								} else if (dir.equals(Direction.SOUTH)) {
+									poseStack.translate(0.0F, 0.0F, -0.5F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(-90));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.above().west()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 					} else {
-						//Facing East
+						//Facing NORTH/SOUTH
 						poseStack.pushPose();
-						poseStack.translate(0.0F, 0.0F, -0.25F);
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						poseStack.translate(0.0F, 0.0F, -0.5F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+
+							if (dir != null) {
+								if (dir.equals(Direction.EAST)) {
+									poseStack.translate(0.5F, 0.0F, 0.0F);
+								} else if (dir.equals(Direction.WEST)) {
+									poseStack.translate(-0.5F, 0.0F, 0.0F);
+								}
+							}
+						}
+						
+						if (!world.getBlockState(blockPos.above().north()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 						
 						poseStack.pushPose();
-						poseStack.translate(0.0F, 0.0F, 0.25F);
+						poseStack.translate(0.0F, 0.0F, 0.5F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+
+							if (dir != null) {
+								if (dir.equals(Direction.EAST)) {
+									poseStack.translate(0.5F, 0.0F, 0.0F);
+								} else if (dir.equals(Direction.WEST)) {
+									poseStack.translate(-0.5F, 0.0F, 0.0F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(180));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.above().south()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 					}
 				} else if (below.getBlock() instanceof BlockPortal) {
@@ -86,27 +148,87 @@ public class RendererPortalDock implements BlockEntityRenderer<AbstractBlockEnti
 					if (axis.equals(Axis.Z)) {
 						//Facing East
 						poseStack.pushPose();
-						poseStack.translate(0.25F, 0.0F, 0.0F);
+						poseStack.translate(0.5F, 0.0F, 0.0F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+							
+							if (dir != null) {
+								if (dir.equals(Direction.NORTH)) {
+									poseStack.translate(0.0F, 0.0F, 0.5F);
+								} else if (dir.equals(Direction.SOUTH)) {
+									poseStack.translate(0.0F, 0.0F, -0.5F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(90));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.below().east()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 						
 						poseStack.pushPose();
-						poseStack.translate(-0.25F, 0.0F, 0.0F);
+						poseStack.translate(-0.5F, 0.0F, 0.0F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+							
+							if (dir != null) {
+								if (dir.equals(Direction.NORTH)) {
+									poseStack.translate(0.0F, 0.0F, 0.5F);
+								} else if (dir.equals(Direction.SOUTH)) {
+									poseStack.translate(0.0F, 0.0F, -0.5F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(-90));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.below().west()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 					} else {
 						//Facing East
 						poseStack.pushPose();
-						poseStack.translate(0.0F, 0.0F, -0.25F);
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						poseStack.translate(0.0F, 0.0F, -0.5F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+
+							if (dir != null) {
+								if (dir.equals(Direction.EAST)) {
+									poseStack.translate(0.5F, 0.0F, 0.0F);
+								} else if (dir.equals(Direction.WEST)) {
+									poseStack.translate(-0.5F, 0.0F, 0.0F);
+								}
+							}
+						}
+						
+						if (!world.getBlockState(blockPos.below().north()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 						
 						poseStack.pushPose();
-						poseStack.translate(0.0F, 0.0F, 0.25F);
+						poseStack.translate(0.0F, 0.0F, 0.5F);
+
+						if (entityIn.portalWidth > 0 && (entityIn.portalWidth & 1) == 0) {
+							Direction dir = entityIn.findLongest();
+
+							if (dir != null) {
+								if (dir.equals(Direction.EAST)) {
+									poseStack.translate(0.5F, 0.0F, 0.0F);
+								} else if (dir.equals(Direction.WEST)) {
+									poseStack.translate(-0.5F, 0.0F, 0.0F);
+								}
+							}
+						}
+						
 						poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(180));
-						CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						if (!world.getBlockState(blockPos.below().south()).isSolid()) {
+							CosmosRendererHelper.renderLabelInWorld(fontRenderer, poseStack, ComponentHelper.style(colour, humanName), bufferIn, combinedLightIn, true, false);
+						}
 						poseStack.popPose();
 					}
 				}

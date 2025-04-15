@@ -1,0 +1,46 @@
+{
+    "parent": "block/block",
+    "display": {
+        "gui": {
+            "rotation": [ 30, 135, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.5, 0.5, 0.5 ]
+        }
+    },
+    "textures": {
+        "particle": "cosmosportals:block/copier/side",
+        "top": "cosmosportals:block/copier/top",
+        "bottom": "cosmosportals:block/copier/bottom",
+        "side": "cosmosportals:block/copier/side"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down": { 
+                	"texture": "#bottom" 
+                },
+				"up": {
+					"texture": "#top"
+				},
+				"north": {
+					"texture": "#side"
+				},
+				"south": {
+					"texture": "#side"
+				},
+				"west": {
+					"texture": "#side"
+				},
+				"east": {
+					"texture": "#side"
+				}
+			}
+        }
+    ]
+}

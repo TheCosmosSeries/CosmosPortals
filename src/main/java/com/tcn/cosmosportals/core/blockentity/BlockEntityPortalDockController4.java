@@ -1,16 +1,9 @@
 package com.tcn.cosmosportals.core.blockentity;
 
 import com.tcn.cosmoslibrary.common.interfaces.block.IBlockInteract;
-import com.tcn.cosmoslibrary.common.interfaces.block.IBlockNotifier;
 import com.tcn.cosmosportals.core.management.ModRegistrationManager;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -19,134 +12,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class BlockEntityPortalDockController4 extends BlockEntity implements IBlockNotifier, IBlockInteract {
-	
-	public int buttonTimer = 20;
-	public int maxButtonTimer = 20;
-	public boolean buttonPressed = false;
-
-	private boolean linked = false;
-	private BlockPos dockPos = BlockPos.ZERO;
-	
-	
+public class BlockEntityPortalDockController4 extends AbstractBlockEntityPortalDockController implements IBlockInteract {
+		
 	public BlockEntityPortalDockController4(BlockPos posIn, BlockState stateIn) {
 		super(ModRegistrationManager.BLOCK_ENTITY_TYPE_PORTAL_DOCK_CONTROLLER4.get(), posIn, stateIn);
 	}
-
-	public void sendUpdates(boolean update) {
-		if (level != null) {
-			this.setChanged();
-			BlockState state = this.getBlockState();
-			
-			level.sendBlockUpdated(this.getBlockPos(), state, state, 3);
-			
-			if (update) {
-				if (!level.isClientSide) {
-					level.setBlockAndUpdate(this.getBlockPos(), state.updateShape(Direction.DOWN, state, level, worldPosition, worldPosition));
-				}
-			}
-		}
-	}
-
-	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
-		super.saveAdditional(compound, provider);
-		
-		compound.putInt("dockX", this.dockPos.getX());
-		compound.putInt("dockY", this.dockPos.getY());
-		compound.putInt("dockZ", this.dockPos.getZ());
-		
-		compound.putBoolean("linked", linked);
-		
-		compound.putBoolean("pressed", this.buttonPressed);
-	}
-
-	@Override
-	public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
-		super.loadAdditional(compound, provider);
-		
-		this.dockPos = new BlockPos(compound.getInt("dockX"), compound.getInt("dockY"), compound.getInt("dockZ"));
-		
-		this.linked = compound.getBoolean("linked");
-		
-		this.buttonPressed = compound.getBoolean("pressed");
-	}
 	
-	public boolean setDockPos(BlockPos posIn) {
-		if (posIn.distManhattan(this.getBlockPos()) < 16) {
-			this.dockPos = posIn;
-			this.setLinked(true);
-			
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public BlockPos getDockPos() {
-		return this.dockPos;
-	}
-
-	public boolean isLinked() {
-		return this.linked;
-	}
-	
-	public void setLinked(boolean linked) {
-		this.linked = linked;
-		this.sendUpdates(true);
-	}
-	
-	public boolean performLinkCheck() {
-		BlockEntity testEntity = this.getLevel().getBlockEntity(this.dockPos);
-		
-		if (testEntity != null) {
-			if (testEntity instanceof AbstractBlockEntityPortalDock) {
-				return true;
-			} else {
-				this.setLinked(false);
-				return false;
-			}
-		} else {
-			this.setLinked(false);
-			return false;
-		}
-	}
-	
-	//Set the data once it has been received. [NBT > TE]
-	@Override
-	public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider provider) {
-		this.loadAdditional(tag, provider);
-	}
-	
-	//Retrieve the data to be stored. [TE > NBT]
-	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-		CompoundTag tag = new CompoundTag();
-		this.saveAdditional(tag, provider);
-		return tag;
-	}
-	
-	//Actually sends the data to the server. [NBT > SER]
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
-	
-	//Method is called once packet has been received by the client. [SER > CLT]
-	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
-		super.onDataPacket(net, pkt, provider);
-		CompoundTag tag_ = pkt.getTag();
-		
-		this.handleUpdateTag(tag_, provider);
-	}
-
 	@Override
 	public void onLoad() { }
 
@@ -164,30 +39,8 @@ public class BlockEntityPortalDockController4 extends BlockEntity implements IBl
 	@Override
 	public void attack(BlockState state, Level levelIn, BlockPos pos, Player player) { }
 
-	public void pressButton(Level levelIn, Player playerIn, int buttonID) {
-		if (this.isLinked()) {
-			if (this.performLinkCheck()) {
-				BlockEntity entity = levelIn.getBlockEntity(this.getDockPos());
-				
-				if (entity != null) {
-					AbstractBlockEntityPortalDock dockEntity = (AbstractBlockEntityPortalDock) entity;
-					
-					if (!(levelIn.isClientSide)) {
-						dockEntity.setCurrentSlot(buttonID);
-						this.buttonPressed = true;
-						dockEntity.sendUpdates(true);
-					}
-					
-				    this.getLevel().playSound(playerIn, this.getBlockPos(), BlockSetType.STONE.buttonClickOn(), SoundSource.BLOCKS);
-				} else {
-					this.performLinkCheck();
-				}
-			}
-		}
-	}
-
 	@Override
-	public BlockState playerWillDestroy(Level levelIn, BlockPos posIn, BlockState stateIn, Player playerIn) { 
+	public BlockState playerWillDestroy(Level levelIn, BlockPos posIn, BlockState stateIn, Player playerIn) {
 		return stateIn;
 	}
 

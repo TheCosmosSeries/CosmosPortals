@@ -3,6 +3,7 @@ package com.tcn.cosmosportals.client.screen;
 import java.util.Arrays;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.tcn.cosmoslibrary.client.ui.CosmosUISystem;
 import com.tcn.cosmoslibrary.client.ui.screen.CosmosScreenBlockEntityUI;
 import com.tcn.cosmoslibrary.client.ui.screen.widget.CosmosButtonWithType;
@@ -88,7 +89,7 @@ public class ScreenPortalDock extends CosmosScreenBlockEntityUI<ContainerPortalD
 				String human_name = blockEntity.getContainerDisplayName();
 				int width = this.font.width(human_name) + 2;
 				
-				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - width / 2, 117, 0, 0, width, 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL);
+				CosmosUISystem.Render.renderStaticElement(graphics, this.getScreenCoords(), (this.imageWidth - 11) / 2 - Math.clamp(width, 0, 98) / 2, 117, 0, 0, Math.clamp(width, 0, 96), 12, new float[] { 1.0F, 1.0F, 1.0F, 0.6F }, CosmosPortalsReference.DOCK_LABEL);
 			}
 
 			ComponentColour customColour = blockEntity.getCustomColour();
@@ -177,13 +178,17 @@ public class ScreenPortalDock extends CosmosScreenBlockEntityUI<ContainerPortalD
 			if (j == 0) {
 				i = 2;
 			} else if (j == 1) {
-				i = 15;
+				i = 23;
 			} else if (j == 2) {
 				i = 19;
 			} else if (j == 3) {
 				i = 22;
 			} else if (j == 4) {
 				i = 1;
+			} else if (j == 5) {
+				i = 15;
+			} else if (j == 6) {
+				i = 35;
 			}
 
 			this.toggleLabelButton = this.addRenderableWidget(new CosmosButtonWithType(TYPE.GENERAL, this.getScreenCoords()[0] + indexL[0], this.getScreenCoords()[1] + indexL[1], indexL[2], true, true, blockEntity.renderLabel ? 1 : 2, ComponentHelper.empty(), (button, isLeftClick) -> { this.clickButton(this.toggleLabelButton, isLeftClick);} ));
@@ -294,7 +299,29 @@ public class ScreenPortalDock extends CosmosScreenBlockEntityUI<ContainerPortalD
 			if (blockEntity.isPortalFormed && blockEntity.renderLabel) {
 				int portalColour = blockEntity.getDisplayColour();
 				
-				graphics.drawCenteredString(font, blockEntity.getContainerDisplayName(), this.getScreenCoords()[0] + (this.imageWidth - 11) / 2, this.getScreenCoords()[1] + 119, portalColour);
+				PoseStack poseStack = graphics.pose();
+				poseStack.pushPose();
+				int width = font.width(blockEntity.getContainerDisplayName());
+				//System.out.println(font.width(blockEntity.getContainerDisplayName()));
+				
+				int xPos = this.getScreenCoords()[0] + (this.imageWidth - 11) / 2;
+				int yPos = this.getScreenCoords()[1] + 119;
+				
+				float scaled = 94F / width;
+				float inverseScaled = 1F / scaled;
+				
+				if (font.width(blockEntity.getContainerDisplayName()) > 94) {
+//					poseStack.translate(-xPos, -yPos, 0.0F);
+					poseStack.scale(scaled, scaled, 1.0F);
+//					poseStack.translate(xPos * inverseScaled, yPos * inverseScaled, 0.0F);
+					
+//					poseStack.scale(0.9F, 0.9F, 1.0F);
+//					poseStack.translate(122 * (94F / width), 134 * (94F / width), 0.0F);
+					graphics.drawCenteredString(font, blockEntity.getContainerDisplayName(), (int) (xPos * inverseScaled), (int) ((yPos + 1) * inverseScaled), portalColour);
+				} else {
+					graphics.drawCenteredString(font, blockEntity.getContainerDisplayName(), xPos, yPos, portalColour);
+				}
+				poseStack.popPose();
 			}
 		}
 	}

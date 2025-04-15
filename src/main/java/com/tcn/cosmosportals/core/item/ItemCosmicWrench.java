@@ -6,8 +6,7 @@ import com.tcn.cosmoslibrary.common.chat.CosmosChatUtil;
 import com.tcn.cosmoslibrary.common.lib.ComponentColour;
 import com.tcn.cosmoslibrary.common.lib.ComponentHelper;
 import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDock;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController4;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockController8;
+import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDockController;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -111,31 +110,7 @@ public class ItemCosmicWrench extends Item {
 					return InteractionResult.SUCCESS;
 				}
 				
-				if (entity instanceof BlockEntityPortalDockController4 blockEntity) {
-					if (stack.has(DataComponents.CUSTOM_DATA)) {
-						CompoundTag stackTag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
-						CompoundTag dockInfo = stackTag.getCompound("dockInfo");
-						
-						int X = dockInfo.getInt("dockX");
-						int Y = dockInfo.getInt("dockY");
-						int Z = dockInfo.getInt("dockZ");
-						
-						BlockPos setPos = new BlockPos(X, Y, Z);
-						
-						if (!blockEntity.setDockPos(setPos)) {
-							CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.RED, "boldunderline", "cosmosportals.item.use.wrench_two"));
-							return InteractionResult.FAIL;
-						}
-
-						CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.GREEN, "bold", "cosmosportals.item.use.wrench_three"));
-						return InteractionResult.SUCCESS;
-					} else {
-						CosmosChatUtil.sendClientPlayerMessage(playerIn, ComponentHelper.style(ComponentColour.RED, "bold", "cosmosportals.item.use.wrench_four"));
-						return InteractionResult.FAIL;
-					}
-				}
-
-				if (entity instanceof BlockEntityPortalDockController8 blockEntity) {
+				if (entity instanceof AbstractBlockEntityPortalDockController blockEntity) {
 					if (stack.has(DataComponents.CUSTOM_DATA)) {
 						CompoundTag stackTag = stack.get(DataComponents.CUSTOM_DATA).copyTag();
 						CompoundTag dockInfo = stackTag.getCompound("dockInfo");

@@ -1,9 +1,11 @@
 package com.tcn.cosmosportals.core.block;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.tcn.cosmoslibrary.common.block.CosmosEntityBlock;
+import com.tcn.cosmoslibrary.common.block.CosmosBlockConnected;
 import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDock;
+import com.tcn.cosmosportals.core.management.ModConfigManager;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -15,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implements PortalFrameBlock {
+public abstract class AbstractBlockPortalDock extends CosmosBlockConnected implements EntityBlock, PortalFrameBlock {
 
 	public AbstractBlockPortalDock(BlockBehaviour.Properties properties) {
 		super(properties);
@@ -128,5 +132,27 @@ public abstract class AbstractBlockPortalDock extends CosmosEntityBlock implemen
 	@Override
 	public RenderShape getRenderShape(BlockState stateIn) {
 		return RenderShape.MODEL;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Nullable
+	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> typeA, BlockEntityType<E> typeE, BlockEntityTicker<? super E> ticker) {
+		return typeE == typeA ? (BlockEntityTicker<A>) ticker : null;
+	}
+
+	@Override
+	protected boolean canConnect(@Nonnull BlockState orig, @Nonnull BlockState conn) {
+		if (ModConfigManager.getInstance().getFrameConnectedTextures()) {
+			if (conn.getBlock().equals(Blocks.AIR)) {
+				return false;
+			} else if (orig.getBlock().equals(conn.getBlock())) {
+				return true;
+			} else if (conn.getBlock() instanceof PortalFrameBlock) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 }

@@ -38,13 +38,17 @@
 	"block.cosmosportals.block_cosmic": "Cosmic Block",
 	
 	"block.cosmosportals.block_container_workbench": "Container Workbench",
+	"block.cosmosportals.block_container_copier": "Container Copier",
 	
 	"block.cosmosportals.block_dock_controller": "Dock Controller [4]",
 	"block.cosmosportals.block_dock_controller8": "Dock Controller [8]",
+	
+	"block.cosmosportals.block_dock_controller_surface": "Dock Controller Surface [4]",
+	"block.cosmosportals.block_dock_controller_surface8": "Dock Controller Surface [8]",
 
 	"cosmosportals.modid": "Cosmos Portals",
 	
-	"cosmosportals.gui.config.name": "Cosmos Portals Config",
+	"cosmosportals.gui.config.name": "Cosmos Portals Configuration",
 	
 	"cosmosportals.gui.config.general_title": "General",
 	"cosmosportals.gui.config.messages_title": "Console Messages",
@@ -56,6 +60,10 @@
 	"cosmosportals.gui.config.size_info": "Allows you to change the maximum size of Portals",
 	"cosmosportals.gui.config.size_info_two": "WARNING: Larger portals WILL create lag",
 	"cosmosportals.gui.config.size_info_three": "Limited to the range of between 2 and 9", 
+	
+	"cosmosportals.gui.config.portal_name_length": "Maximum Portal Name Length",
+	"cosmosportals.gui.config.portal_name_length_info": "Allows you to change the maximum size of Portals",
+	"cosmosportals.gui.config.portal_name_length_info_one": "Limited to the range of between 6 and 24", 
 	
 	"cosmosportals.gui.config.sound.travel": "Portal Travel Sounds",
 	"cosmosportals.gui.config.sound.travel_info": "Whether this mod will play Portal Travel Sounds",
@@ -95,6 +103,7 @@
 	"cosmosportals.gui.dock_upgraded_eight": "Upgraded Portal Dock 8",
 	
 	"cosmosportals.gui.workbench": "Container Workbench",
+	"cosmosportals.gui.copier": "Container Copier",
 	
 	"cosmosportals.gui.dock.label_info": "Show or Hide Portal Dimension Labels.",
 	"cosmosportals.gui.dock.label_value": "Labels are currently:",
@@ -218,6 +227,31 @@
 	"cosmosportals.ui.help.workbench.colour_two": "Colour, with all 16 of Minecraft's",
 	"cosmosportals.ui.help.workbench.colour_three": "colours available to choose from.",
 	
+	
+	"cosmosportals.ui.help.copier.container": "Input Containers",
+	"cosmosportals.ui.help.copier.container_one": "Put a stack of containers here as when",
+	"cosmosportals.ui.help.copier.container_two": "you copy a Container, you require an",
+	"cosmosportals.ui.help.copier.container_three": "unlinked Container.",
+	
+	"cosmosportals.ui.help.copier.container_linked": "Containers to copy",
+	"cosmosportals.ui.help.copier.container_linked_one": "Place the Containers you wish to copy",
+	"cosmosportals.ui.help.copier.container_linked_two": "in these slots.",
+	
+	"cosmosportals.ui.help.copier.container_copied": "New Container",
+	"cosmosportals.ui.help.copier.container_copied_one": "This is where a fresh copy of your",
+	"cosmosportals.ui.help.copier.container_copied_two": "Container will appear.",
+	
+	"cosmosportals.ui.help.copier.button_left": "Left Button",
+	"cosmosportals.ui.help.copier.button_left_one": "Cycle the selected slot left.",
+	
+	"cosmosportals.ui.help.copier.button_right": "Right Button",
+	"cosmosportals.ui.help.copier.button_right_one": "Cycle the selected slot right.",
+	
+	"cosmosportals.ui.help.copier.button_apply": "Copy Container Button",
+	"cosmosportals.ui.help.copier.button_apply_one": "Copy the selected Container",
+	"cosmosportals.ui.help.copier.button_apply_two": "into the output slot.",
+	
+	
 	"cosmosportals.ui.help.cycle_up": "Slot Cycle Up Button",
 	"cosmosportals.ui.help.cycle_up_one": "Allows you to select the",
 	"cosmosportals.ui.help.cycle_up_two": "next Container slot Up.",
@@ -274,9 +308,14 @@
 	"cosmosportals.block_info.dock_upgraded_three": "Has a GUI, can be configured.",
 	
 	"cosmosportals.block_info.workbench": "Container Workbench",
-	"cosmosportals.block_info.workbench_one": "Used to duplicate Dimension Containers.",
+	"cosmosportals.block_info.workbench_one": "Used to duplicate or rename & re-colour Dimension Containers.",
 	"cosmosportals.block_info.workbench_two": "To use: Right-click to to open the UI.",
-	"cosmosportals.block_info.workbench_limit": "You must provide unlinked Dimension Containers.",
+	"cosmosportals.block_info.workbench_limit": "You must provide unlinked Dimension Containers if duplicating.",
+	
+	"cosmosportals.block_info.copier": "Container Copier",
+	"cosmosportals.block_info.copier_one": "Used exclusively to duplicate Dimension Containers.",
+	"cosmosportals.block_info.copier_two": "To use: Right-click to to open the UI.",
+	"cosmosportals.block_info.copier_limit": "You must provide unlinked Dimension Containers.",
 	
 	"cosmosportals.block_info.dock_controller": "Cosmic Dock Controller [4]",
 	"cosmosportals.block_info.dock_controller8": "Cosmic Dock Controller [8]",

@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"ingredients": [
+        {
+            "item": "cosmosportals:block_dock_controller8"
+        }
+	],
+	"result": {
+		"id": "cosmosportals:block_dock_controller_surface8"
+	}
+}

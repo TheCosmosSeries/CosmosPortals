@@ -1,0 +1,8 @@
+{
+	"multipart": [ 
+		{	"when": { "AND": [ { "facing": "north" } ]}, "apply": { "model": "cosmosportals:block/dock_controller_surface/base", "y": 180   } },
+		{	"when": { "AND": [ { "facing": "south" } ]}, "apply": { "model": "cosmosportals:block/dock_controller_surface/base"} },
+		{	"when": { "AND": [ { "facing": "west" } ]}, "apply": { "model": "cosmosportals:block/dock_controller_surface/base", "y": 90  } },
+		{	"when": { "AND": [ { "facing": "east" } ]}, "apply": { "model": "cosmosportals:block/dock_controller_surface/base", "y": -90  } }
+	]
+}

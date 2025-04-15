@@ -2,6 +2,8 @@ package com.tcn.cosmosportals.core.management;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.tcn.cosmosportals.CosmosPortals;
+
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
 import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
@@ -27,6 +29,7 @@ public class ModConfigManager {
 	private final BooleanValue playPortalTravelSounds;
 	private final BooleanValue playPortalAmbientSounds;
 	private final BooleanValue allowWardenTeleport;
+	private final IntValue portal_name_length;
 	
 	private final BooleanValue info_message;
 	private final BooleanValue debug_message;
@@ -44,6 +47,7 @@ public class ModConfigManager {
 			playPortalTravelSounds = builder.comment("Whether this mod will play Portal Travel Sounds").define("travel_sounds", true);
 			playPortalAmbientSounds = builder.comment("Whether this mod will play Ambient Portal Sounds").define("ambient_sounds", true);
 			allowWardenTeleport = builder.comment("Whether Wardens can travel through Portals").define("warden_teleport", true);
+			portal_name_length = builder.comment("Allows you to change the maximum length of Portal Container Names").defineInRange("portal_name_length", 12, 6, 24);
 		}
 		builder.pop();
 		
@@ -100,6 +104,16 @@ public class ModConfigManager {
 	public void setAllowWardenTeleport(boolean value) {
 		this.allowWardenTeleport.set(value);
 	}
+
+	public int getPortalNameLength() {
+		return this.portal_name_length.get();
+	}
+	
+	public void setPortalNameLength(int value) {
+		this.portal_name_length.set(value);
+	}
+	
+	
 	
 	/** -Messages- */
 	public boolean getInfoMessage() {
@@ -108,6 +122,7 @@ public class ModConfigManager {
 	
 	public void setInfoMessage(boolean value) {
 		this.info_message.set(value);
+		CosmosPortals.CONSOLE.updateInfoEnabled(value);
 	}
 	
 	public boolean getDebugMessage() {
@@ -116,6 +131,7 @@ public class ModConfigManager {
 	
 	public void setDebugMessage(boolean value) {
 		this.debug_message.set(value);
+		CosmosPortals.CONSOLE.updateDebugEnabled(value);
 	}
 	
 	/** -Visual- */

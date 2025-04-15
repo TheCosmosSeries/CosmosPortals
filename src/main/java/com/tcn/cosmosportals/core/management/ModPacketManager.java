@@ -3,9 +3,11 @@ package com.tcn.cosmosportals.core.management;
 import com.tcn.cosmosportals.CosmosPortals;
 import com.tcn.cosmosportals.core.network.ServerPacketHandler;
 import com.tcn.cosmosportals.core.network.packet.PacketColour;
+import com.tcn.cosmosportals.core.network.packet.PacketCopyItem;
 import com.tcn.cosmosportals.core.network.packet.PacketGuideUpdate;
 import com.tcn.cosmosportals.core.network.packet.PacketNextSlot;
 import com.tcn.cosmosportals.core.network.packet.PacketPortalDock;
+import com.tcn.cosmosportals.core.network.packet.PacketSelectSlot;
 import com.tcn.cosmosportals.core.network.packet.PacketWorkbenchName;
 
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,5 +26,8 @@ public class ModPacketManager {
 	    registrar.playToServer(PacketNextSlot.TYPE, PacketNextSlot.STREAM_CODEC, ServerPacketHandler::handleDataOnNetwork);
 	    registrar.playToServer(PacketPortalDock.TYPE, PacketPortalDock.STREAM_CODEC, ServerPacketHandler::handleDataOnNetwork);
 	    registrar.playToServer(PacketWorkbenchName.TYPE, PacketWorkbenchName.STREAM_CODEC, ServerPacketHandler::handleDataOnNetwork);
+	    
+	    registrar.playToServer(PacketSelectSlot.TYPE, PacketSelectSlot.STREAM_CODEC, ServerPacketHandler::handleDataOnNetwork);
+	    registrar.playToServer(PacketCopyItem.TYPE, PacketCopyItem.STREAM_CODEC, ServerPacketHandler::handleDataOnNetwork);
 	}
 }

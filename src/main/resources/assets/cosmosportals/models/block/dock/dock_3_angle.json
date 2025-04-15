@@ -1,0 +1,14 @@
+{
+    "__comment": "Model for when three adjacent sides are connected.",
+	"parent": "cosmoslibrary:block/tinted_cube",
+    "render_type": "cutout",
+    "textures": {
+		"particle": "cosmosportals:block/dock/connected/normal",
+        "down": "cosmosportals:block/dock/connected/ur",
+		"up": "cosmosportals:block/dock/connected/udlr",
+		"north": "cosmosportals:block/dock/connected/ul",
+		"south": "cosmosportals:block/dock/connected/udlr",
+		"west": "cosmosportals:block/dock/connected/ur",
+		"east": "cosmosportals:block/dock/connected/udlr"
+    }
+}

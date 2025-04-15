@@ -43,6 +43,10 @@ public class CosmosPortalsReference {
 	public static final ResourceLocation[] WORKBENCH = new ResourceLocation[] { ResourceLocation.parse(GUI + "workbench/background.png"), ResourceLocation.parse(GUI + "workbench/background_dark.png") };
 	public static final ResourceLocation[] WORKBENCH_SLOTS = new ResourceLocation[] { ResourceLocation.parse(GUI + "workbench/slots.png"), ResourceLocation.parse(GUI + "workbench/slots_dark.png") };
 	public static final ResourceLocation[] WORKBENCH_OVERLAY = new ResourceLocation[] { ResourceLocation.parse(GUI + "workbench/overlay.png"), ResourceLocation.parse(GUI + "workbench/overlay_dark.png") };
+
+	public static final ResourceLocation[] COPIER = new ResourceLocation[] { ResourceLocation.parse(GUI + "copier/background.png"), ResourceLocation.parse(GUI + "copier/background_dark.png") };
+	public static final ResourceLocation[] COPIER_SLOTS = new ResourceLocation[] { ResourceLocation.parse(GUI + "copier/slots.png"), ResourceLocation.parse(GUI + "copier/slots_dark.png") };
+	public static final ResourceLocation[] COPIER_OVERLAY = new ResourceLocation[] { ResourceLocation.parse(GUI + "copier/overlay.png"), ResourceLocation.parse(GUI + "copier/overlay_dark.png") };
 	
 	public static final ResourceLocation[] GUIDE = new ResourceLocation[] { ResourceLocation.fromNamespaceAndPath(CosmosPortals.MOD_ID, "textures/gui/guide/guide.png"), ResourceLocation.fromNamespaceAndPath(CosmosPortals.MOD_ID, "textures/gui/guide/guide_dark.png") };
 	public static final ResourceLocation GUIDE_FLAT_TEXTURES = ResourceLocation.fromNamespaceAndPath(CosmosPortals.MOD_ID, "textures/gui/guide/textures_flat.png");

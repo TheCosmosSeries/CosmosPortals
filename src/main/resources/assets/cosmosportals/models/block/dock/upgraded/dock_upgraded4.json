@@ -1,0 +1,32 @@
+{
+    "parent": "block/block",
+    "render_type": "cutout",
+    "textures": {
+        "centre": "cosmosportals:block/dock/overlay",
+        "overlay1": "cosmosportals:block/dock/overlay_upgraded"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#centre",  "cullface": "down",  "tintindex": 1 },
+                "up":    { "texture": "#centre",  "cullface": "up",    "tintindex": 1 },
+                "north": { "texture": "#centre",  "cullface": "north", "tintindex": 1 },
+                "south": { "texture": "#centre",  "cullface": "south", "tintindex": 1 },
+                "west":  { "texture": "#centre",  "cullface": "west",  "tintindex": 1 },
+                "east":  { "texture": "#centre",  "cullface": "east",  "tintindex": 1 }
+            }
+        },
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#overlay1",  "cullface": "down",  "tintindex": 2 },
+                "up":    { "texture": "#overlay1",  "cullface": "up",    "tintindex": 2 },
+                "north": { "texture": "#overlay1",  "cullface": "north", "tintindex": 2 },
+                "south": { "texture": "#overlay1",  "cullface": "south", "tintindex": 2 },
+                "west":  { "texture": "#overlay1",  "cullface": "west",  "tintindex": 2 },
+                "east":  { "texture": "#overlay1",  "cullface": "east",  "tintindex": 2 }
+            }
+        }
+    ]
+}

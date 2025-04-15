@@ -137,11 +137,9 @@ public class BlockEntityContainerWorkbench extends BlockEntity implements IBlock
 	@Override
 	public void setChanged() {
 		super.setChanged();
-		
-		if (!this.getItem(1).isEmpty()) {
-			if (this.getItem(1).getItem() instanceof ItemPortalContainer) {
-				ItemPortalContainer item = (ItemPortalContainer) this.getItem(1).getItem();
 				
+		if (!this.getItem(1).isEmpty()) {
+			if (this.getItem(1).getItem() instanceof ItemPortalContainer item) {				
 				this.display_name = item.getContainerDisplayName(this.getItem(1));
 			}
 		} else {
@@ -154,10 +152,10 @@ public class BlockEntityContainerWorkbench extends BlockEntity implements IBlock
 
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack stackIn, BlockState state, Level levelIn, BlockPos posIn, Player playerIn, InteractionHand handIn, BlockHitResult hit) {
-		if (!this.level.isClientSide && playerIn instanceof ServerPlayer serverPlayer) {
+		if (!levelIn.isClientSide() && playerIn instanceof ServerPlayer serverPlayer) {
             serverPlayer.openMenu(this, (buf) -> buf.writeBlockPos(posIn));
         }
-        return ItemInteractionResult.sidedSuccess(this.level.isClientSide);
+        return ItemInteractionResult.sidedSuccess(levelIn.isClientSide());
 	}
 
 	@Override
@@ -170,7 +168,7 @@ public class BlockEntityContainerWorkbench extends BlockEntity implements IBlock
 	
 	@Override
 	public BlockState playerWillDestroy(Level levelIn, BlockPos posIn, BlockState stateIn, Player playerIn) {
-		if (!levelIn.isClientSide) {
+		if (!levelIn.isClientSide()) {
 			if (!playerIn.getInventory().add(this.getItem(0))) {
 				ItemEntity entity = new ItemEntity(levelIn, posIn.getX(), posIn.getY(), posIn.getZ(), this.getItem(0));
 				entity.setPickUpDelay(50);

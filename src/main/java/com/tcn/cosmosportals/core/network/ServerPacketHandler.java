@@ -3,14 +3,15 @@ package com.tcn.cosmosportals.core.network;
 import com.tcn.cosmoslibrary.common.util.CosmosUtil;
 import com.tcn.cosmosportals.CosmosPortals;
 import com.tcn.cosmosportals.core.blockentity.AbstractBlockEntityPortalDock;
+import com.tcn.cosmosportals.core.blockentity.BlockEntityContainerCopier;
 import com.tcn.cosmosportals.core.blockentity.BlockEntityContainerWorkbench;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockUpgraded4;
-import com.tcn.cosmosportals.core.blockentity.BlockEntityPortalDockUpgraded8;
 import com.tcn.cosmosportals.core.item.ItemPortalGuide;
 import com.tcn.cosmosportals.core.network.packet.PacketColour;
+import com.tcn.cosmosportals.core.network.packet.PacketCopyItem;
 import com.tcn.cosmosportals.core.network.packet.PacketGuideUpdate;
 import com.tcn.cosmosportals.core.network.packet.PacketNextSlot;
 import com.tcn.cosmosportals.core.network.packet.PacketPortalDock;
+import com.tcn.cosmosportals.core.network.packet.PacketSelectSlot;
 import com.tcn.cosmosportals.core.network.packet.PacketWorkbenchName;
 
 import net.minecraft.server.level.ServerLevel;
@@ -63,9 +64,7 @@ public class ServerPacketHandler {
 				ServerLevel world = (ServerLevel) context.player().level();
 				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (entity instanceof BlockEntityPortalDockUpgraded4 tileEntity) {
-					tileEntity.selectNextSlot(packet.forward());
-				} else if (entity instanceof BlockEntityPortalDockUpgraded8 tileEntity) {
+				if (entity instanceof AbstractBlockEntityPortalDock tileEntity) {
 					tileEntity.selectNextSlot(packet.forward());
 				} else {
 					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <portaldockupgraded> Block Entity not equal to expected.");
@@ -76,9 +75,8 @@ public class ServerPacketHandler {
 		if (data instanceof PacketPortalDock packet) {
 			context.enqueueWork(() -> {
 				ServerLevel world = (ServerLevel) context.player().level();
-				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (entity instanceof AbstractBlockEntityPortalDock tileEntity) {
+				if (world.getBlockEntity(packet.pos()) instanceof AbstractBlockEntityPortalDock tileEntity) {
 					if (packet.id() == 0) {
 						tileEntity.toggleRenderLabel();
 					} else if (packet.id() == 1) {
@@ -101,12 +99,37 @@ public class ServerPacketHandler {
 		if (data instanceof PacketWorkbenchName packet) {
 			context.enqueueWork(() -> {
 				ServerLevel world = (ServerLevel) context.player().level();
-				BlockEntity entity = world.getBlockEntity(packet.pos());
 				
-				if (entity instanceof BlockEntityContainerWorkbench tileEntity) {
+				if (world.getBlockEntity(packet.pos()) instanceof BlockEntityContainerWorkbench tileEntity) {
 					tileEntity.setContainerDisplayName(packet.displayName());
 				} else {
 					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <container_workbench> Block Entity not equal to expected.");
+				}
+				
+			});
+		}
+
+		if (data instanceof PacketSelectSlot packet) {
+			context.enqueueWork(() -> {
+				ServerLevel world = (ServerLevel) context.player().level();
+				
+				if (world.getBlockEntity(packet.pos()) instanceof BlockEntityContainerCopier tileEntity) {
+					tileEntity.selectNextSlot(packet.left());
+				} else {
+					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <container_copier> Block Entity not equal to expected.");
+				}
+				
+			});
+		}
+		
+		if (data instanceof PacketCopyItem packet) {
+			context.enqueueWork(() -> {
+				ServerLevel world = (ServerLevel) context.player().level();
+				
+				if (world.getBlockEntity(packet.pos()) instanceof BlockEntityContainerCopier tileEntity) {
+					tileEntity.copyItem();
+				} else {
+					CosmosPortals.CONSOLE.debugWarn("[Packet Delivery Failure] <container_copier> Block Entity not equal to expected.");
 				}
 				
 			});

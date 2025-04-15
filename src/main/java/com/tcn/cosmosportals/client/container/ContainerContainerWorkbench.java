@@ -35,7 +35,7 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 		super(ModRegistrationManager.MENU_TYPE_CONTAINER_WORKBENCH.get(), indexIn, playerInventoryIn, accessIn, posIn);
 		this.container = contentsIn;
 		
-		this.addSlot(new SlotSpecifiedItem(contentsIn, 0, 34, 46, ModRegistrationManager.DIMENSION_CONTAINER.get(), 16) {
+		this.addSlot(new SlotSpecifiedItem(contentsIn, 0, 54, 46, ModRegistrationManager.DIMENSION_CONTAINER.get(), 16) {
 			@Override
 			public void setChanged() {
 				super.setChanged();
@@ -45,11 +45,18 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 			}
 		});
 		
-		this.addSlot(new SlotSpecifiedItem(contentsIn, 1, 78, 46, ModRegistrationManager.DIMENSION_CONTAINER_LINKED.get(), 1) {
+		this.addSlot(new SlotSpecifiedItem(contentsIn, 1, 88, 46, ModRegistrationManager.DIMENSION_CONTAINER_LINKED.get(), 1) {
 			@Override
 			public void setChanged() {
 				super.setChanged();
 				ContainerContainerWorkbench.this.slotsChanged(this.container);
+				this.container.setChanged();
+				contentsIn.setChanged();
+			}
+			
+			@Override
+			public void onTake(Player playerIn, ItemStack stackIn) {
+				super.onTake(playerIn, stackIn);
 				this.container.setChanged();
 				contentsIn.setChanged();
 			}
@@ -89,7 +96,6 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 	@Override
     public void broadcastChanges() {
 		super.broadcastChanges();
-		
 		this.createResult();
     }
     
@@ -103,7 +109,6 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 		if (!this.container.getItem(1).isEmpty()) {
 			this.shrinkStackInSlot(1);
 		}
-		this.slotsChanged(container);
 	}
 
 	private void shrinkStackInSlot(int slotIndex) {
@@ -178,6 +183,7 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 						if (!this.moveItemStackTo(itemstack1, this.slots.size() - 9, this.slots.size(), false)) {
 							return ItemStack.EMPTY;
 						}
+						this.slotsChanged(this.container);
 					}
 				} else {
 					if (!this.moveItemStackTo(itemstack1, this.slots.size() - 9, this.slots.size(), false)) {
@@ -206,13 +212,14 @@ public class ContainerContainerWorkbench extends CosmosContainerMenuBlockEntity 
 			
 			if (itemstack1.isEmpty()) {
 				slot.set(ItemStack.EMPTY);
+				slot.setChanged();
 			} else {
 				slot.setChanged();
 			}
 
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
+//			if (itemstack1.getCount() == itemstack.getCount()) {
+//				return ItemStack.EMPTY;
+//			}
 
 			slot.onTake(playerIn, itemstack1);
 		}
